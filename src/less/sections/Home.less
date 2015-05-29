@@ -3,6 +3,7 @@
 }
 
 .home-title{
+    visibility: hidden;
     color: white;
     position: absolute;
     text-align: center;
@@ -34,6 +35,7 @@
 }
 
 .generic-button{
+    visibility: hidden;
     -webkit-box-shadow: 3px 4px 7px 0px #899599;
     box-shadow: 3px 4px 7px 0px #899599;
     background-color:transparent;
@@ -44,13 +46,14 @@
     display:inline-block;
     cursor:pointer;
     color:#ffffff;
-    font-family:Arial;
+    font-family:Coda;
     font-size:15px;
     font-weight:bold;
-    padding:9px 25px;
     text-decoration:none;
     text-shadow:0px 1px 0px #e1e2ed;
     opacity: 0.8;
+    min-height: 50px;
+    white-space: normal;
 }
 
 .generic-button:hover {
@@ -60,7 +63,6 @@
 
 .button-add-cafe{
     position: relative;
-    height: 50px;
     top: 45%;
     width: 80%;
     left: 10%;
@@ -68,11 +70,9 @@
 
 .button-temperature{
     position: relative;
-    height: 50px;
     top: 50%;
     width: 80%;
     left: 10%;
-
 }
 .credits{
     bottom: 10px;
@@ -102,6 +102,7 @@
 }
 
 .thermometer{
+    visibility: hidden;
     background: url('images/thermometer.png');
     height: 500px;
     width: 130px;
@@ -109,4 +110,21 @@
     position: absolute;
     right: 20px;
     bottom: 20px;
+    color: white;
+    font-family: Coda;
+    font-size: 40px;
+
+    .degrees{
+      bottom: 38px;
+      position: absolute;
+      text-align: center;
+      left: 25%;
+    }
+    .messure{
+      bottom: 50px;
+      position: absolute;
+      text-align: center;
+      left: 48%;
+      font-size: 30px;
+    }
 }

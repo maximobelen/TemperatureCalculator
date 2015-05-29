@@ -30,6 +30,7 @@ class Home extends SpookyEl {
         this.controlPanel.temperatureCalculate = new SpookyEl('.button-temperature', this);
         this.controlPanel.addCafe= new SpookyEl('.button-add-cafe', this);
         this.canvas = new SpookyEl('.canvas-container', this);
+        this.thermometer= new SpookyEl('.thermometer', this);
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         var _this=this;
         console.log(this.canvas.view.offsetWidth);
@@ -53,6 +54,7 @@ class Home extends SpookyEl {
         loader.load( "js/models/cup.json", ( obj ) => {
             console.log(obj);
             this.scene.add(obj);
+            this.executeTweens();
         } );
 
         var directionalLight_1 = new THREE.DirectionalLight( 0xffffff, 0.3 );
@@ -80,38 +82,50 @@ class Home extends SpookyEl {
         // start animation
         this.animate();
 
-        TweenMax.fromTo(this.controlPanel.temperatureCalculate, 0.5, {
-            x: -100,
-            autoalpha:0
-        }, {
-            x: 0,
-            delay:0.1,
-            autoalpha:1,
-            ease: Expo.easeOut
-        });
-        TweenMax.fromTo(this.controlPanel.addCafe, 0.5, {
-            x: -100,
-            autoalpha:0
-        }, {
-            x: 0,
-            delay:0.1,
-            autoalpha:1,
-            ease: Expo.easeOut
-        });
 
-        TweenMax.fromTo(this.title, 1, {
-            y: -100,
-            autoalpha:0
-        }, {
-            y: 0,
-            autoalpha:1,
-            ease: Expo.easeOut
-        });
-
+        window.addEventListener( 'resize', this.onWindowResize.bind(this), false );
 
 
     }
+    executeTweens(){
 
+        TweenMax.fromTo(this.controlPanel.temperatureCalculate, 1.5, {
+            x: -100,
+            autoAlpha:0
+        }, {
+            x: 0,
+            delay:0.1,
+            autoAlpha:1,
+            ease: Expo.easeOut
+        });
+        TweenMax.fromTo(this.controlPanel.addCafe, 1.5, {
+            x: -100,
+            autoAlpha:0
+        }, {
+            x: 0,
+            delay:0.1,
+            autoAlpha:1,
+            ease: Expo.easeOut
+        });
+
+        TweenMax.fromTo(this.thermometer, 1.5, {
+            y: 1000,
+            autoAlpha:0
+        }, {
+            y: 0,
+            autoAlpha:1,
+            ease: Expo.easeOut
+        });
+
+        TweenMax.fromTo(this.title, 1.3, {
+            autoAlpha:0
+        }, {
+            autoAlpha:1,
+            ease: Expo.easeOut
+        });
+
+
+    }
 
     animate(){
         var _this = this;
@@ -121,6 +135,15 @@ class Home extends SpookyEl {
         requestAnimationFrame( ()=>{
             _this.animate();
         });
+    }
+
+    onWindowResize(){
+
+            this.camera.aspect = window.innerWidth / window.innerHeight;
+            this.camera.updateProjectionMatrix();
+
+            this.renderer.setSize( window.innerWidth, window.innerHeight );
+
     }
 
 
