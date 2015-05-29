@@ -2,6 +2,7 @@ var SpookyEl = require('spooky-element');
 var THREE = require('three');
 var OrbitControls = require('three-orbit-controls')(THREE);
 var TweenMax = require('gsap');
+var domSelect = require('dom-select');
 
 
 // revolutions per second
@@ -9,9 +10,6 @@ var angularSpeed = 0.2;
 var lastTime = 0;
 var controls;
 var clock = new THREE.Clock();
-
-
-
 
 class Home extends SpookyEl {
 
@@ -23,6 +21,7 @@ class Home extends SpookyEl {
 
         this.renderer = new THREE.WebGLRenderer();
 
+
         super(data);
 
         this.title= new SpookyEl('.home-title', this);
@@ -30,9 +29,10 @@ class Home extends SpookyEl {
         this.controlPanel.temperatureCalculate = new SpookyEl('.button-temperature', this);
         this.controlPanel.addCafe= new SpookyEl('.button-add-cafe', this);
         this.canvas = new SpookyEl('.canvas-container', this);
-        this.thermometer= new SpookyEl('.thermometer', this);
+        this.thermometer = new SpookyEl('.thermometer', this);
+        this.thermometer.degrees = 0;
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        var _this=this;
+        var _this = this;
         console.log(this.canvas.view.offsetWidth);
         console.log( this.canvas.view.offsetHeight);
 
@@ -72,8 +72,13 @@ class Home extends SpookyEl {
         controls.addEventListener( 'change', this.animate );
 
 
-        this.controlPanel.temperatureCalculate.on( 'click', function(){
-            console.log('temperature');
+        this.controlPanel.temperatureCalculate.on( 'click', () => {
+
+            this.thermometer.degrees = this.thermometer.degrees+1;
+        
+            domSelect('.degrees',this.view).innerHTML = this.thermometer.degrees;
+
+            console.log(this.thermometer.degrees);
         } );
         this.controlPanel.addCafe.on( 'click', function(){
             console.log('cafe');
