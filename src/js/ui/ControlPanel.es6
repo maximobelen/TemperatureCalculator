@@ -1,7 +1,6 @@
 var SpookyEl = require('spooky-element');
 var Signal = require('signals');
-var domSelect = require('dom-select');
-
+var TweenMax = require('gsap');
 
 class ControlPanel extends SpookyEl {
 

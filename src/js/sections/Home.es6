@@ -1,15 +1,10 @@
 var SpookyEl = require('spooky-element');
 var THREE = require('three');
-var OrbitControls = require('three-orbit-controls')(THREE);
 var TweenMax = require('gsap');
-var domSelect = require('dom-select');
 var Signal = require('signals');
 var Thermometer = require('../ui/Thermometer');
 var ControlPanel = require('../ui/ControlPanel');
 var Canvas = require('../ui/Canvas');
-
-var controls;
-var clock = new THREE.Clock();
 
 class Home extends SpookyEl {
 
