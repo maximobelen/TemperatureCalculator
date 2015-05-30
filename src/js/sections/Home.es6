@@ -74,6 +74,14 @@ class Home extends SpookyEl {
         controls = new OrbitControls( this.camera );
         controls.addEventListener( 'change', this.animate );
 
+        var geometry = new THREE.CylinderGeometry( 90, 90, 200, 32 );
+        var material = new THREE.MeshBasicMaterial( {color: 0x382818} );
+        this.cafe = new THREE.Mesh( geometry, material );
+
+        this.isEmpty = true;
+        this.cafe.position.z = 0;
+        this.cafe.position.x = -68;
+        this.cafe.position.y = 70;
 
         this.controlPanel.temperatureCalculate.on( 'click', () => {
             if(!this.thermometer.mercury.top<=46){
@@ -91,8 +99,12 @@ class Home extends SpookyEl {
 
      
         } );
-        this.controlPanel.addCafe.on( 'click', function(){
-            console.log('cafe');
+        this.controlPanel.addCafe.on( 'click', () =>{
+            if(this.isEmpty){
+                this.scene.add( this.cafe );
+                this.isEmpty = false;
+            }
+
         } );
 
         // start animation
