@@ -102,29 +102,40 @@
 }
 
 .thermometer{
+    position: absolute;
     visibility: hidden;
-    background: url('images/thermometer.png');
+    background: url('images/thermometer-clean.png');
     height: 500px;
     width: 130px;
     z-index: 11;
-    position: absolute;
     right: 20px;
     bottom: 20px;
     color: white;
     font-family: Coda;
-    font-size: 40px;
+    font-size: 35px;
+
+    .mercury{
+      position: absolute;
+      background-color: #ff0303;
+      width: 20px;
+      left: 60px;
+      top: 388px;
+      border-top-left-radius: 1em;
+      border-top-right-radius: 1em;
+    }
 
     .degrees{
-      bottom: 38px;
-      position: absolute;
+      top: 410px;
+      position: relative;
       text-align: center;
-      left: 25%;
+      /* left: 25%; */
+      font-family: courier;
     }
     .messure{
-      bottom: 61px;
+      bottom: 69px;
       position: absolute;
       text-align: center;
-      left: 56%;
-      font-size: 30px;
+      left: 64%;
+      font-size: 15px;
     }
 }

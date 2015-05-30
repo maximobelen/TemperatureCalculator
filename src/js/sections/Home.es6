@@ -31,6 +31,9 @@ class Home extends SpookyEl {
         this.canvas = new SpookyEl('.canvas-container', this);
         this.thermometer = new SpookyEl('.thermometer', this);
         this.thermometer.degrees = 0;
+        this.thermometer.mercury = new SpookyEl('.mercury', this);
+        this.thermometer.mercury.top = 388;
+
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         var _this = this;
         console.log(this.canvas.view.offsetWidth);
@@ -73,12 +76,20 @@ class Home extends SpookyEl {
 
 
         this.controlPanel.temperatureCalculate.on( 'click', () => {
+            if(!this.thermometer.mercury.top<=46){
+                this.thermometer.degrees = this.thermometer.degrees+1;
+                this.thermometer.mercury.top+=-3;
 
-            this.thermometer.degrees = this.thermometer.degrees+1;
-        
-            domSelect('.degrees',this.view).innerHTML = this.thermometer.degrees;
+                TweenMax.to(this.thermometer.mercury, 0.5, {
+                    height:this.thermometer.degrees*3,
+                    top:this.thermometer.mercury.top
+                });
+                    
+                domSelect('.degrees',this.view).innerHTML = this.thermometer.degrees;
+            }
 
-            console.log(this.thermometer.degrees);
+
+     
         } );
         this.controlPanel.addCafe.on( 'click', function(){
             console.log('cafe');
