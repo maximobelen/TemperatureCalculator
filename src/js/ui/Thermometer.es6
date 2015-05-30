@@ -1,4 +1,7 @@
 var SpookyEl = require('spooky-element');
+var domSelect = require('dom-select');
+var TweenMax = require('gsap');
+
 
 class Thermometer extends SpookyEl {
 
@@ -26,6 +29,21 @@ class Thermometer extends SpookyEl {
             ease: Expo.easeOut
         });
       
+    }
+
+    calculateTemperature(){
+
+        if(!this.mercury.top <= 46){
+            this.degrees = this.degrees + 1;
+            this.mercury.top += -3;
+
+            TweenMax.to(this.mercury, 0.5, {
+                height:this.degrees * 3,
+                top:this.mercury.top
+            });
+                
+            domSelect('.degrees',this.view).innerHTML = this.degrees;
+        }
     }
 
 

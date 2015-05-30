@@ -17,6 +17,7 @@ class ControlPanel extends SpookyEl {
         this.isEmpty = true;
 
         this.onAddCafe = new Signal();
+        this.onCalculateTemperature = new Signal();
 
         this.addListeners();
 
@@ -49,17 +50,7 @@ class ControlPanel extends SpookyEl {
     addListeners(){
 
       this.temperatureCalculate.on( 'click', () => {
-        if(!this.mercury.top <= 46){
-            this.degrees = this.degrees + 1;
-            this.mercury.top+=-3;
-
-            TweenMax.to(this.mercury, 0.5, {
-                height:this.degrees * 3,
-                top:this.mercury.top
-            });
-                
-            domSelect('.degrees',this.view).innerHTML = this.degrees;
-        }
+        this.onCalculateTemperature.dispatch();
       });
 
       this.addCafe.on( 'click', () =>{
