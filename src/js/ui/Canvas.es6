@@ -33,7 +33,7 @@ class Canvas extends SpookyEl {
         this.camera.position.X = 0;
         this.camera.position.y = 0;
 
-
+        this.onCanvasReady = new Signal();
         // scene
         this.scene = new THREE.Scene();
 
@@ -43,7 +43,7 @@ class Canvas extends SpookyEl {
         loader.load( "js/models/cup.json", ( obj ) => {
             console.log(obj);
             this.scene.add(obj);
-            this.animateIn();
+            this.onCanvasReady.dispatch();
         } );
 
         var directionalLight_1 = new THREE.DirectionalLight( 0xffffff, 0.3 );

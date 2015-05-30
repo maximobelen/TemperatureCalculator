@@ -44,17 +44,18 @@ class Home extends SpookyEl {
 
         this.controlPanel.onAddCafe.add(this.addCafe.bind(this));
         this.controlPanel.onCalculateTemperature.add(this.thermometer.calculateTemperature.bind(this.thermometer));
+        this.canvas.onCanvasReady.add(this.animate.bind(this));
 
         window.addEventListener( 'resize', this.onWindowResize.bind(this), false );
 
 
     }
-    animateIn(){
+    animate(){
 
         this.thermometer.animateIn();
         this.controlPanel.animateIn();
 
-        TweenMax.fromTo(this.title, 1.3, {
+        TweenMax.fromTo(this.title, 2, {
             autoAlpha:0
         }, {
             autoAlpha:1,
