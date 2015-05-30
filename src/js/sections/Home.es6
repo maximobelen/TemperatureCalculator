@@ -3,11 +3,10 @@ var THREE = require('three');
 var OrbitControls = require('three-orbit-controls')(THREE);
 var TweenMax = require('gsap');
 var domSelect = require('dom-select');
+var Thermometer = require('../ui/Thermometer');
+var ControlPanel = require('../ui/ControlPanel');
+var Signal = require('signals');
 
-
-// revolutions per second
-var angularSpeed = 0.2; 
-var lastTime = 0;
 var controls;
 var clock = new THREE.Clock();
 
@@ -21,18 +20,17 @@ class Home extends SpookyEl {
 
         this.renderer = new THREE.WebGLRenderer();
 
-
         super(data);
 
         this.title= new SpookyEl('.home-title', this);
-        this.controlPanel = new SpookyEl('.control-panel', this);
-        this.controlPanel.temperatureCalculate = new SpookyEl('.button-temperature', this);
-        this.controlPanel.addCafe= new SpookyEl('.button-add-cafe', this);
+       
         this.canvas = new SpookyEl('.canvas-container', this);
-        this.thermometer = new SpookyEl('.thermometer', this);
-        this.thermometer.degrees = 0;
-        this.thermometer.mercury = new SpookyEl('.mercury', this);
-        this.thermometer.mercury.top = 388;
+        this.thermometer = new Thermometer();
+        this.thermometer.appendTo(this);
+
+        this.controlPanel = new ControlPanel();
+        this.controlPanel.appendTo(this);
+
 
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         var _this = this;
@@ -57,7 +55,7 @@ class Home extends SpookyEl {
         loader.load( "js/models/cup.json", ( obj ) => {
             console.log(obj);
             this.scene.add(obj);
-            this.executeTweens();
+            this.animateIn();
         } );
 
         var directionalLight_1 = new THREE.DirectionalLight( 0xffffff, 0.3 );
@@ -78,34 +76,11 @@ class Home extends SpookyEl {
         var material = new THREE.MeshBasicMaterial( {color: 0x382818} );
         this.cafe = new THREE.Mesh( geometry, material );
 
-        this.isEmpty = true;
         this.cafe.position.z = 0;
         this.cafe.position.x = -68;
         this.cafe.position.y = 70;
 
-        this.controlPanel.temperatureCalculate.on( 'click', () => {
-            if(!this.thermometer.mercury.top<=46){
-                this.thermometer.degrees = this.thermometer.degrees+1;
-                this.thermometer.mercury.top+=-3;
-
-                TweenMax.to(this.thermometer.mercury, 0.5, {
-                    height:this.thermometer.degrees*3,
-                    top:this.thermometer.mercury.top
-                });
-                    
-                domSelect('.degrees',this.view).innerHTML = this.thermometer.degrees;
-            }
-
-
-     
-        } );
-        this.controlPanel.addCafe.on( 'click', () =>{
-            if(this.isEmpty){
-                this.scene.add( this.cafe );
-                this.isEmpty = false;
-            }
-
-        } );
+        this.controlPanel.onAddCafe.add(this.addCafe.bind(this));
 
         // start animation
         this.animate();
@@ -115,35 +90,10 @@ class Home extends SpookyEl {
 
 
     }
-    executeTweens(){
+    animateIn(){
 
-        TweenMax.fromTo(this.controlPanel.temperatureCalculate, 1.5, {
-            x: -100,
-            autoAlpha:0
-        }, {
-            x: 0,
-            delay:0.1,
-            autoAlpha:1,
-            ease: Expo.easeOut
-        });
-        TweenMax.fromTo(this.controlPanel.addCafe, 1.5, {
-            x: -100,
-            autoAlpha:0
-        }, {
-            x: 0,
-            delay:0.1,
-            autoAlpha:1,
-            ease: Expo.easeOut
-        });
-
-        TweenMax.fromTo(this.thermometer, 1.5, {
-            y: 1000,
-            autoAlpha:0
-        }, {
-            y: 0,
-            autoAlpha:1,
-            ease: Expo.easeOut
-        });
+        this.thermometer.animateIn();
+        this.controlPanel.animateIn();
 
         TweenMax.fromTo(this.title, 1.3, {
             autoAlpha:0
@@ -151,8 +101,6 @@ class Home extends SpookyEl {
             autoAlpha:1,
             ease: Expo.easeOut
         });
-
-
     }
 
     animate(){
@@ -163,6 +111,10 @@ class Home extends SpookyEl {
         requestAnimationFrame( ()=>{
             _this.animate();
         });
+    }
+
+    addCafe(){
+        this.scene.add( this.cafe );
     }
 
     onWindowResize(){
