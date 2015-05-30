@@ -41,7 +41,6 @@ class Canvas extends SpookyEl {
 
 
         loader.load( "js/models/cup.json", ( obj ) => {
-            console.log(obj);
             this.scene.add(obj);
             this.onCanvasReady.dispatch();
         } );
@@ -58,12 +57,7 @@ class Canvas extends SpookyEl {
         this.scene.add( light );
 
         controls = new OrbitControls( this.camera );
-        controls.addEventListener( 'change', this.animate );
-
-        // start animation
-        this.animate();
-
-
+        controls.addEventListener( 'change', this.animate.bind(this) );
 
 
     }
@@ -72,17 +66,13 @@ class Canvas extends SpookyEl {
     }
 
     animate(){
-        var _this = this;
-        _this.renderer.render(_this.scene, _this.camera);
 
-        // request new frame
-        requestAnimationFrame( ()=>{
-            _this.animate();
-        });
+        this.renderer.render(this.scene, this.camera);
+
     }
 
-    addCafe(){
-        this.scene.add( this.cafe );
+    addCafe(cafe){
+        this.scene.add(cafe);
     }
 
 }

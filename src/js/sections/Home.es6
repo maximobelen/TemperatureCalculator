@@ -51,7 +51,7 @@ class Home extends SpookyEl {
 
     }
     animate(){
-
+        this.canvas.animate();
         this.thermometer.animateIn();
         this.controlPanel.animateIn();
 
@@ -61,10 +61,13 @@ class Home extends SpookyEl {
             autoAlpha:1,
             ease: Expo.easeOut
         });
+
+
     }
 
     addCafe(){
-        this.canvas.scene.add( this.cafe );
+        this.canvas.addCafe( this.cafe );
+        this.canvas.animate();
     }
 
     onWindowResize(){
