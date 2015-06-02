@@ -71,6 +71,7 @@ class Home extends SpookyEl {
             this.canvas.camera.updateProjectionMatrix();
 
             this.canvas.renderer.setSize( window.innerWidth, window.innerHeight );
+            this.canvas.resize();
 
     }
 

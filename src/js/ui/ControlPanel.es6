@@ -20,6 +20,8 @@ class ControlPanel extends SpookyEl {
 
         this.addListeners();
 
+
+
     }
 
     animateIn(){
@@ -30,7 +32,7 @@ class ControlPanel extends SpookyEl {
         }, {
             x: 0,
             delay:0.1,
-            autoAlpha:1,
+            autoAlpha:0.8,
             ease: Expo.easeOut
       });
 
@@ -40,7 +42,7 @@ class ControlPanel extends SpookyEl {
       }, {
           x: 0,
           delay:0.1,
-          autoAlpha:1,
+          autoAlpha:0.8,
           ease: Expo.easeOut
       });
       
@@ -59,6 +61,30 @@ class ControlPanel extends SpookyEl {
           }
 
       } );
+
+      this.temperatureCalculate.on( 'mouseenter', () => {
+          TweenMax.to(this.temperatureCalculate, 0.5, {
+            autoAlpha:1
+          });
+      });
+
+      this.addCafe.on( 'mouseenter', () => {
+          TweenMax.to(this.addCafe, 0.5, {
+            autoAlpha:1
+          });
+      });
+
+      this.temperatureCalculate.on( 'mouseleave', () => {
+          TweenMax.to(this.temperatureCalculate, 0.5, {
+            autoAlpha:0.8
+          });
+      });
+
+      this.addCafe.on( 'mouseleave', () => {
+          TweenMax.to(this.addCafe, 0.5, {
+            autoAlpha:0.8
+          });
+      });
 
     }
 

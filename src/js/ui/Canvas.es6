@@ -75,6 +75,9 @@ class Canvas extends SpookyEl {
         this.scene.add(cafe);
     }
 
+    resize(){
+            this.animate();
+    }
 }
 
 module.exports = Canvas;
