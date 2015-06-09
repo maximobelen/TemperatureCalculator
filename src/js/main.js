@@ -13,7 +13,16 @@ domReady(function(){
 
     var routerInit = function(){
         this.add('home', '/', {view:require('./sections/Home')});
+        this.add('coffee', '/coffee', {view:require('./sections/CoffeeCup')});
+        this.add('concrete', '/concrete', {view:require('./sections/ConcreteBar')});
+
     }
+
+
+    router.onRouteNotFound.add(function(){
+        router.go('home');
+    });
+
 
     router.init(container, routerInit);
 

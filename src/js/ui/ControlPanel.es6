@@ -33,7 +33,7 @@ class ControlPanel extends SpookyEl {
             x: 0,
             delay:0.1,
             autoAlpha:0.8,
-            ease: Expo.easeOut
+            ease: Expo.easeIn
       });
 
       TweenMax.fromTo(this.addCafe, 1.5, {
@@ -43,7 +43,7 @@ class ControlPanel extends SpookyEl {
           x: 0,
           delay:0.1,
           autoAlpha:0.8,
-          ease: Expo.easeOut
+          ease: Expo.easeIn
       });
       
     }

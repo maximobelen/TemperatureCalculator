@@ -26,6 +26,19 @@ class Thermometer extends SpookyEl {
         }, {
             y: 0,
             autoAlpha:1,
+            ease: Expo.easeIn
+        });
+      
+    }
+
+    animateOut(){
+
+        TweenMax.fromTo(this, 1.5, {
+            y: 0,
+            autoAlpha:1
+        }, {
+            y: 1000,
+            autoAlpha:0,
             ease: Expo.easeOut
         });
       

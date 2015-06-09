@@ -2,79 +2,127 @@ var SpookyEl = require('spooky-element');
 var THREE = require('three');
 var TweenMax = require('gsap');
 var Signal = require('signals');
-var Thermometer = require('../ui/Thermometer');
-var ControlPanel = require('../ui/ControlPanel');
-var Canvas = require('../ui/Canvas');
+var router = require('../router-main');
 
 class Home extends SpookyEl {
 
     constructor(data){
 
-
         this.template = require('../templates/sections/Home.hbs');
          // renderer
 
         super(data);
+        
 
-        this.title= new SpookyEl('.home-title', this);
-       
-    
-        this.thermometer = new Thermometer();
-        this.thermometer.appendTo(this);
+        this.buttonConcreteBar = new SpookyEl('.button-concrete-bar', this);
+        this.buttonCafe = new SpookyEl('.button-coffee-cup', this);
+        this.title = new SpookyEl('.home-title', this);
+        this.footer = new SpookyEl('.home-footer', this);
+        this.buttonsContainer = new SpookyEl('.buttons-container', this);
 
-        this.controlPanel = new ControlPanel();
-        this.controlPanel.appendTo(this);
+        this.addListeners();
+    }
+    animate(){
 
-        this.canvas = new Canvas();
-        this.canvas.appendTo(this);
-
-
-        var geometry = new THREE.CylinderGeometry( 90, 90, 200, 32 );
-        var material = new THREE.MeshBasicMaterial( {color: 0x382818} );
-        this.cafe = new THREE.Mesh( geometry, material );
-
-        this.cafe.position.z = 0;
-        this.cafe.position.x = -68;
-        this.cafe.position.y = 70;
-
-        this.controlPanel.onAddCafe.add(this.addCafe.bind(this));
-        this.controlPanel.onCalculateTemperature.add(this.thermometer.calculateTemperature.bind(this.thermometer));
-        this.canvas.onCanvasReady.add(this.animate.bind(this));
-
-        window.addEventListener( 'resize', this.onWindowResize.bind(this), false );
 
 
     }
-    animate(){
-        this.canvas.animate();
-        this.thermometer.animateIn();
-        this.controlPanel.animateIn();
+    
+    animateIn(){
 
-        TweenMax.fromTo(this.title, 2, {
+        TweenMax.fromTo(this.title, 0.5, {
             autoAlpha:0
         }, {
             autoAlpha:1,
+            ease: Expo.easeIn
+        });
+
+        TweenMax.fromTo(this.buttonsContainer, 0.5, {
+            autoAlpha:0
+        }, {
+            autoAlpha:1,
+            ease: Expo.easeIn
+        });
+        TweenMax.fromTo(this.footer, 0.5, {
+            autoAlpha:0
+        }, {
+            autoAlpha:1,
+            ease: Expo.easeIn
+        });
+
+
+    }
+    
+    animateOut(){
+
+        TweenMax.fromTo(this.title, 0.2, {
+            autoAlpha:1
+        }, {
+            autoAlpha:0,
+            ease: Expo.easeOut
+        });
+
+        TweenMax.fromTo(this.buttonsContainer, 0.2, {
+            autoAlpha:1
+        }, {
+            autoAlpha:0,
+            ease: Expo.easeOut
+        });
+        TweenMax.fromTo(this.footer, 0.2, {
+            autoAlpha:1
+        }, {
+            autoAlpha:0,
             ease: Expo.easeOut
         });
 
 
     }
 
-    addCafe(){
-        this.canvas.addCafe( this.cafe );
-        this.canvas.animate();
+    addListeners(){
+
+        this.buttonConcreteBar.on( 'click', () => {
+            router.go('concrete');
+            this.animateOut();
+
+        });
+
+        this.buttonCafe.on( 'click', () =>{
+            router.go('coffee');
+            this.animateOut();
+        });
+
+        this.buttonConcreteBar.on( 'mouseenter', () => {
+            TweenMax.to(this.buttonConcreteBar, 0.5, {
+                autoAlpha:1,
+                color: '#e5c100'
+            });
+        });
+
+        this.buttonCafe.on( 'mouseenter', () => {
+            TweenMax.to(this.buttonCafe, 0.5, {
+                autoAlpha:1,
+                color: '#e5c100'
+            });
+        });
+
+        this.buttonConcreteBar.on( 'mouseleave', () => {
+            TweenMax.to(this.buttonConcreteBar, 0.5, {
+                autoAlpha:0.7,
+                color: '#ffffff'
+            });
+        });
+
+        this.buttonCafe.on( 'mouseleave', () => {
+            TweenMax.to(this.buttonCafe, 0.5, {
+                autoAlpha:0.7,
+                color: '#ffffff'
+            });
+        });
     }
 
-    onWindowResize(){
-
-            this.canvas.camera.aspect = window.innerWidth / window.innerHeight;
-            this.canvas.camera.updateProjectionMatrix();
-
-            this.canvas.renderer.setSize( window.innerWidth, window.innerHeight );
-            this.canvas.resize();
-
+    paramsChanged(params) {
+        console.log('navigating to '+params);
     }
-
 
 }
 
