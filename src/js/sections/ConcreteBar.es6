@@ -26,17 +26,9 @@ class ConcreteBar extends SpookyEl {
         this.controlPanel = new ControlPanel();
         this.controlPanel.appendTo(this);
 
-        this.canvas = new Canvas();
+        this.canvas = new Canvas({isConcreteBar:true});
         this.canvas.appendTo(this);
 
-
-        var geometry = new THREE.CylinderGeometry( 90, 90, 200, 32 );
-        var material = new THREE.MeshBasicMaterial( {color: 0x382818} );
-        this.cafe = new THREE.Mesh( geometry, material );
-
-        this.cafe.position.z = 0;
-        this.cafe.position.x = -68;
-        this.cafe.position.y = 70;
 
         this.controlPanel.onAddCafe.add(this.addCafe.bind(this));
         this.controlPanel.onCalculateTemperature.add(this.thermometer.calculateTemperature.bind(this.thermometer));
@@ -91,8 +83,7 @@ class ConcreteBar extends SpookyEl {
     }
 
     addCafe(){
-        this.canvas.addCafe( this.cafe );
-        this.canvas.animate();
+
     }
 
     resize(){

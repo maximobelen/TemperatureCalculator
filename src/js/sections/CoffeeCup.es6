@@ -26,7 +26,7 @@ class CoffeeCup extends SpookyEl {
         this.controlPanel = new ControlPanel();
         this.controlPanel.appendTo(this);
 
-        this.canvas = new Canvas();
+        this.canvas = new Canvas({isConcreteBar:false});
         this.canvas.appendTo(this);
 
 

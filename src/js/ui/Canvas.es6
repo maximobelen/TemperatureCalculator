@@ -37,14 +37,22 @@ class Canvas extends SpookyEl {
         // scene
         this.scene = new THREE.Scene();
 
-        var loader = new THREE.ObjectLoader();
+        if(data.isConcreteBar){
+
+            this.cube = new THREE.Mesh( new THREE.CubeGeometry( 400, 30, 30 ), new THREE.MeshPhongMaterial( {color: 0xB3B3B3} ) );
+            this.cube.position.y = 150;
+            this.scene.add( this.cube );
+
+        }else{
+
+            var loader = new THREE.ObjectLoader();
 
 
-        loader.load( "js/models/cup.json", ( obj ) => {
-            this.scene.add(obj);
-            this.onCanvasReady.dispatch();
-        } );
-
+            loader.load( "js/models/cup.json", ( obj ) => {
+                this.scene.add(obj);
+                this.onCanvasReady.dispatch();
+            } );
+        }
         var directionalLight_1 = new THREE.DirectionalLight( 0xffffff, 0.3 );
         directionalLight_1.position.set( 50, -100, 150 );
         this.scene.add( directionalLight_1 );
