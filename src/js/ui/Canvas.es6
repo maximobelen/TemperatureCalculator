@@ -4,7 +4,6 @@ var OrbitControls = require('three-orbit-controls')(THREE);
 var TweenMax = require('gsap');
 var domSelect = require('dom-select');
 var Thermometer = require('../ui/Thermometer');
-var ControlPanel = require('../ui/ControlPanel');
 var Signal = require('signals');
 
 var controls;

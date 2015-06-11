@@ -1,6 +1,7 @@
 var SpookyEl = require('spooky-element');
 var Signal = require('signals');
 var TweenMax = require('gsap');
+var router = require('../../router-main');
 
 class ControlPanel extends SpookyEl {
 
@@ -13,6 +14,7 @@ class ControlPanel extends SpookyEl {
 
         this.temperatureCalculate = new SpookyEl('.button-temperature', this);
         this.addCafe = new SpookyEl('.button-add-cafe', this);
+        this.home = new SpookyEl('.home-button', this);
         this.isEmpty = true;
 
         this.onAddCafe = new Signal();
@@ -34,6 +36,13 @@ class ControlPanel extends SpookyEl {
             delay:0.1,
             autoAlpha:0.8,
             ease: Expo.easeIn
+      });
+
+      TweenMax.fromTo(this.home, 1.5, {
+          autoAlpha:0
+      }, {
+          autoAlpha:0.8,
+          ease: Expo.easeIn
       });
 
       TweenMax.fromTo(this.addCafe, 1.5, {
@@ -62,6 +71,11 @@ class ControlPanel extends SpookyEl {
 
       } );
 
+      this.home.on( 'click', () =>{
+            router.go('home');
+            this.animateOut();
+      } );
+
       this.temperatureCalculate.on( 'mouseenter', () => {
           TweenMax.to(this.temperatureCalculate, 0.5, {
             autoAlpha:1
@@ -71,6 +85,18 @@ class ControlPanel extends SpookyEl {
       this.addCafe.on( 'mouseenter', () => {
           TweenMax.to(this.addCafe, 0.5, {
             autoAlpha:1
+          });
+      });
+
+      this.home.on( 'mouseenter', () => {
+          TweenMax.to(this.home, 0.5, {
+            autoAlpha:1
+          });
+      });
+
+      this.home.on( 'mouseleave', () => {
+          TweenMax.to(this.home, 0.5, {
+            autoAlpha:0.8
           });
       });
 
