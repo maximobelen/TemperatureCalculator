@@ -7,7 +7,7 @@ class ControlPanel extends SpookyEl {
     constructor(data){
 
 
-        this.template = require('../templates/ui/ControlPanel.hbs');
+        this.template = require('../../templates/ui/ConcreteBar/ControlPanel.hbs');
 
         super(data);
 

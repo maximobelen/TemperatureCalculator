@@ -55,6 +55,8 @@ class Home extends SpookyEl {
     
     animateOut(){
 
+        var _this = this;
+
         TweenMax.fromTo(this.title, 0.2, {
             autoAlpha:1
         }, {
@@ -72,9 +74,11 @@ class Home extends SpookyEl {
             autoAlpha:1
         }, {
             autoAlpha:0,
-            ease: Expo.easeOut
+            ease: Expo.easeOut,
+            onComplete:function(){
+                _this.remove();
+            }
         });
-
 
     }
 

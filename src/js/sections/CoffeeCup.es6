@@ -3,7 +3,7 @@ var THREE = require('three');
 var TweenMax = require('gsap');
 var Signal = require('signals');
 var Thermometer = require('../ui/Thermometer');
-var ControlPanel = require('../ui/ControlPanel');
+var ControlPanel = require('../ui/CoffeeCup/ControlPanel');
 var Canvas = require('../ui/Canvas');
 var router = require('../router-main');
 
@@ -73,14 +73,17 @@ class CoffeeCup extends SpookyEl {
     }
 
     animateOut(){
-
+        var _this = this;
         this.thermometer.animateOut();
 
         TweenMax.fromTo(this, 0.5, {
             autoAlpha:1
         }, {
             autoAlpha:0,
-            ease: Expo.easeOut
+            ease: Expo.easeOut,
+            onComplete:function(){
+                _this.remove();
+            }
         });
 
     }
