@@ -44,6 +44,23 @@ class Thermometer extends SpookyEl {
       
     }
 
+    setTemperature(temperature){
+
+        this.degrees = temperature;
+
+        var hundredPercent= 342;
+
+        var height = (hundredPercent * this.degrees) / 100
+        TweenMax.to(this.mercury, 1.5, {
+            height:height,
+            ease: Linear.easeIn
+            //top:this.mercury.top
+        });
+            
+        domSelect('.degrees',this.view).innerHTML = this.degrees;
+        
+    }
+
     calculateTemperature(){
 
         if(!this.mercury.top <= 46){

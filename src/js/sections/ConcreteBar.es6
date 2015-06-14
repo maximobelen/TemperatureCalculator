@@ -6,6 +6,8 @@ var Thermometer = require('../ui/Thermometer');
 var ControlPanel = require('../ui/ConcreteBar/ControlPanel');
 var Canvas = require('../ui/Canvas');
 var router = require('../router-main');
+var calculateTemperature = require('../utils/CalculateTemperature');
+
 
 class ConcreteBar extends SpookyEl {
 
@@ -83,7 +85,8 @@ class ConcreteBar extends SpookyEl {
     }
 
     calculatePointerTemperature(){
-        this.thermometer.calculateTemperature();
+        var temperature = calculateTemperature(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue, 0);
+        this.thermometer.setTemperature(temperature);
         this.canvas.addPoint(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue);
     }
 

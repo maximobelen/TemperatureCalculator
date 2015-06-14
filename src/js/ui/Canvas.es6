@@ -39,7 +39,6 @@ class Canvas extends SpookyEl {
         if(data.isConcreteBar){
 
             this.cube = new THREE.Mesh( new THREE.CubeGeometry( 200, 100, 40 ), new THREE.MeshPhongMaterial( {color: 0xB3B3B3} ) );
-            this.cube.position.y = 150;
             this.scene.add( this.cube );
 
         }else{
@@ -78,9 +77,14 @@ class Canvas extends SpookyEl {
     }
 
     addPoint(x,y,z){
-        var geometry = new THREE.SphereGeometry( 5, 32, 32 );
-        var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+
+        var selectedObject = this.scene.getObjectByName('point');
+        this.scene.remove( selectedObject );
+
+        var geometry = new THREE.SphereGeometry( 5, 100, 32 );
+        var material = new THREE.MeshBasicMaterial( {color: 0xDF0101} );
         var sphere = new THREE.Mesh( geometry, material );
+        sphere.name = "point";
         sphere.position.x = x;
         sphere.position.y = y;
         sphere.position.z = z;
