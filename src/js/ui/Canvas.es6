@@ -66,7 +66,6 @@ class Canvas extends SpookyEl {
         controls = new OrbitControls( this.camera, this._view );
         controls.addEventListener( 'change', this.animate.bind(this) );
 
-
     }
     animateIn(){
 
@@ -76,6 +75,17 @@ class Canvas extends SpookyEl {
 
         this.renderer.render(this.scene, this.camera);
 
+    }
+
+    addPoint(x,y,z){
+        var geometry = new THREE.SphereGeometry( 5, 32, 32 );
+        var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+        var sphere = new THREE.Mesh( geometry, material );
+        sphere.position.x = x;
+        sphere.position.y = y;
+        sphere.position.z = z;
+        this.scene.add( sphere );
+        this.animate();
     }
 
     addCafe(cafe){

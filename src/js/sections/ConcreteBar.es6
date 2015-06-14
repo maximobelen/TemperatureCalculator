@@ -30,7 +30,8 @@ class ConcreteBar extends SpookyEl {
         this.canvas.appendTo(this);
 
 
-        this.controlPanel.onCalculateTemperature.add(this.thermometer.calculateTemperature.bind(this.thermometer));
+        this.controlPanel.onCalculateTemperature.add(this.calculatePointerTemperature.bind(this));
+
         this.canvas.onCanvasReady.add(this.animate.bind(this));
 
         window.addEventListener( 'resize', this.resize.bind(this), false );
@@ -58,9 +59,6 @@ class ConcreteBar extends SpookyEl {
                 });
             }
         });
-
-
-
     }
 
     animateOut(){
@@ -82,9 +80,12 @@ class ConcreteBar extends SpookyEl {
 
     animate(){
 
-
     }
 
+    calculatePointerTemperature(){
+        this.thermometer.calculateTemperature();
+        this.canvas.addPoint(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue);
+    }
 
     resize(){
 
