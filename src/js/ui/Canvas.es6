@@ -21,7 +21,7 @@ class Canvas extends SpookyEl {
 
         super(data);
 
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        //this.renderer.setSize(window.innerWidth*0.95, window.innerHeight);
         var _this = this;
 
         this.view.appendChild(this.renderer.domElement);
@@ -38,7 +38,7 @@ class Canvas extends SpookyEl {
 
         if(data.isConcreteBar){
 
-            this.cube = new THREE.Mesh( new THREE.CubeGeometry( 400, 30, 30 ), new THREE.MeshPhongMaterial( {color: 0xB3B3B3} ) );
+            this.cube = new THREE.Mesh( new THREE.CubeGeometry( 200, 100, 40 ), new THREE.MeshPhongMaterial( {color: 0xB3B3B3} ) );
             this.cube.position.y = 150;
             this.scene.add( this.cube );
 
@@ -63,7 +63,7 @@ class Canvas extends SpookyEl {
         var light = new THREE.AmbientLight( 0x2E2E2E ); // soft white light 
         this.scene.add( light );
 
-        controls = new OrbitControls( this.camera );
+        controls = new OrbitControls( this.camera, this._view );
         controls.addEventListener( 'change', this.animate.bind(this) );
 
 

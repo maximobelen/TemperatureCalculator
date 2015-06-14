@@ -30,7 +30,6 @@ class ConcreteBar extends SpookyEl {
         this.canvas.appendTo(this);
 
 
-        this.controlPanel.onAddCafe.add(this.addCafe.bind(this));
         this.controlPanel.onCalculateTemperature.add(this.thermometer.calculateTemperature.bind(this.thermometer));
         this.canvas.onCanvasReady.add(this.animate.bind(this));
 
@@ -86,9 +85,6 @@ class ConcreteBar extends SpookyEl {
 
     }
 
-    addCafe(){
-
-    }
 
     resize(){
 
