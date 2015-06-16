@@ -8,7 +8,7 @@ var Signal = require('signals');
 
 var controls;
 var clock = new THREE.Clock();
-
+var scale = 20;
 class Canvas extends SpookyEl {
 
     constructor(data){
@@ -38,7 +38,11 @@ class Canvas extends SpookyEl {
 
         if(data.isConcreteBar){
 
-            this.cube = new THREE.Mesh( new THREE.CubeGeometry( 200, 100, 40 ), new THREE.MeshPhongMaterial( {color: 0xB3B3B3} ) );
+            var material = new THREE.MeshNormalMaterial( {
+                wireframe: true
+            } );
+
+            this.cube = new THREE.Mesh( new THREE.CubeGeometry( 10 * scale, 5 * scale, 2 * scale ), material );
             this.scene.add( this.cube );
 
         }else{
@@ -81,13 +85,13 @@ class Canvas extends SpookyEl {
         var selectedObject = this.scene.getObjectByName('point');
         this.scene.remove( selectedObject );
 
-        var geometry = new THREE.SphereGeometry( 5, 100, 32 );
+        var geometry = new THREE.SphereGeometry( 2, 100, 32 );
         var material = new THREE.MeshBasicMaterial( {color: 0xDF0101} );
         var sphere = new THREE.Mesh( geometry, material );
         sphere.name = "point";
-        sphere.position.x = x;
-        sphere.position.y = y;
-        sphere.position.z = z;
+        sphere.position.x = x * scale;
+        sphere.position.y = y * scale;
+        sphere.position.z = z * scale;
         this.scene.add( sphere );
         this.animate();
     }
