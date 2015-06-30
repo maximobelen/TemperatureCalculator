@@ -88,6 +88,7 @@ class ConcreteBar extends SpookyEl {
         var temperature = calculateTemperature(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue, 0);
         this.thermometer.setTemperature(temperature);
         this.canvas.addPoint(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue);
+        this.canvas.addParticles(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue);
     }
 
     resize(){
