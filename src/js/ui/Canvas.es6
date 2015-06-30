@@ -89,8 +89,8 @@ class Canvas extends SpookyEl {
 
         var colors = [];
 
-        for (var p = 0; p < 1500; p++) {
-            var vector = this.randomSpherePoint(x,y,z, 50)
+        for (var p = 0; p < 2000; p++) {
+            var vector = this.randomSpherePoint(x * scale, y * scale, z * scale, 1 * scale);
             var particle = new THREE.Vector3(vector[0],vector[1] ,vector[2] );
             var temperature = Math.floor((Math.random() * 100) + 1);
             var rgb = colorTemperatureToRGB(temperature);
@@ -105,7 +105,7 @@ class Canvas extends SpookyEl {
 
         // material
         var material = new THREE.PointCloudMaterial( {
-            size: 1,
+            size: 0.5,
             transparent: false,
             opacity: 1,
             vertexColors: THREE.VertexColors
