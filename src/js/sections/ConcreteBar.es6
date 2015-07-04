@@ -8,6 +8,7 @@ var Canvas = require('../ui/Canvas');
 var router = require('../router-main');
 var calculateTemperature = require('../utils/CalculateTemperature');
 
+var scale = 20;
 
 class ConcreteBar extends SpookyEl {
 
@@ -28,7 +29,7 @@ class ConcreteBar extends SpookyEl {
         this.controlPanel = new ControlPanel();
         this.controlPanel.appendTo(this);
 
-        this.canvas = new Canvas({isConcreteBar:true});
+        this.canvas = new Canvas({isConcreteBar:true, scale:scale});
         this.canvas.appendTo(this);
 
 
@@ -85,7 +86,7 @@ class ConcreteBar extends SpookyEl {
     }
 
     calculatePointerTemperature(){
-        var temperature = calculateTemperature(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue, 0);
+        var temperature = calculateTemperature(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue, 0, scale);
         this.thermometer.setTemperature(temperature);
         this.canvas.addPoint(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue);
         this.canvas.addParticles(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue);
