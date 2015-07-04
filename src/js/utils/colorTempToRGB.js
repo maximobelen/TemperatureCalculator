@@ -48,9 +48,9 @@ function colorTemperatureToRGB(celcius){
  
  
     return {
-        r : clamp(red,   0, 255),
-        g : clamp(green, 0, 255),
-        b : clamp(blue,  0, 255)
+        r : clamp(Math.trunc(red),   0, 255),
+        g : clamp(Math.trunc(green), 0, 255),
+        b : clamp(Math.trunc(blue),  0, 255)
     }
  
 }

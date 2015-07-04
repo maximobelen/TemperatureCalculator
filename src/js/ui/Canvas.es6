@@ -13,7 +13,7 @@ var clock = new THREE.Clock();
 class Canvas extends SpookyEl {
 
     constructor(data){
-        this.scale = data.scale;
+        //this.scale = data.scale;
 
         this.template = require('../templates/ui/Canvas.hbs');
          // renderer
@@ -27,7 +27,7 @@ class Canvas extends SpookyEl {
 
         // camera
         this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 5000);
-        this.camera.position.z = 100;
+        this.camera.position.z = 20;
         this.camera.position.x = 0;
         this.camera.position.y = 0;
 
@@ -44,10 +44,8 @@ class Canvas extends SpookyEl {
             var xSize = 10,
             ySize = 2,
             zSize = 5;
-            this.cube = new THREE.Mesh( new THREE.CubeGeometry( xSize * this.scale, ySize * this.scale, zSize * this.scale ), material );
-            // this.cube.position.x = xSize * this.scale;
-            // this.cube.position.y = ySize * this.scale;
-            // this.cube.position.z = zSize * this.scale;
+            this.cube = new THREE.Mesh( new THREE.CubeGeometry( xSize, ySize, zSize), material );
+
             this.scene.add( this.cube );
 
         }else{
@@ -95,13 +93,12 @@ class Canvas extends SpookyEl {
         var colors = [];
 
         for (var p = 0; p < 2000; p++) {
-            var vector = this.randomSpherePoint(x * this.scale, y * this.scale, z * this.scale, 1 * this.scale);
+            var vector = this.randomSpherePoint(x , y, z, 1);
             var particle = new THREE.Vector3(vector[0],vector[1] ,vector[2] );
             var temperature = Math.floor((Math.random() * 100) + 1);
             var rgb = colorTemperatureToRGB(temperature);
             var colorString = "rgb("+rgb.r+","+rgb.g+","+rgb.b+")";
             colors[p] = new THREE.Color( colorString );
-
             particles.vertices.push(particle);
 
         }
@@ -110,7 +107,7 @@ class Canvas extends SpookyEl {
 
         // material
         var material = new THREE.PointCloudMaterial( {
-            size: 0.5,
+            size: 0.01,
             transparent: false,
             opacity: 1,
             vertexColors: THREE.VertexColors
@@ -123,18 +120,21 @@ class Canvas extends SpookyEl {
     }
 
 
-    addPoint(x,y,z){
+    addPoint(x,y,z, temperature){
 
         var selectedObject = this.scene.getObjectByName('point');
         this.scene.remove( selectedObject );
 
-        var geometry = new THREE.SphereGeometry( 1, 100, 32 );
-        var material = new THREE.MeshBasicMaterial( {color: 0xDF0101} );
+        var geometry = new THREE.SphereGeometry( 0.05, 100, 32 );
+        var rgb = colorTemperatureToRGB(temperature);
+        var colorString = "rgb("+rgb.r+","+rgb.g+","+rgb.b+")";
+
+        var material = new THREE.MeshBasicMaterial( {color: colorString} );
         var sphere = new THREE.Mesh( geometry, material );
         sphere.name = "point";
-        sphere.position.x = x * this.scale;
-        sphere.position.y = y * this.scale;
-        sphere.position.z = z * this.scale;
+        sphere.position.x = x;
+        sphere.position.y = y;
+        sphere.position.z = z;
         this.scene.add( sphere );
         this.animate();
     }
@@ -155,7 +155,7 @@ class Canvas extends SpookyEl {
     }
 
     resize(){
-            this.animate();
+        this.animate();
     }
 }
 

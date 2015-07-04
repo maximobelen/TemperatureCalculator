@@ -61,23 +61,23 @@ class ControlPanel extends SpookyEl {
         e.preventDefault();
         _this.onCalculateTemperature.dispatch();
 
-        domSelect('.x-value',_this).innerHTML = "";
-        domSelect('.y-value',_this).innerHTML = "";
-        domSelect('.z-value',_this.view).innerHTML = "";
-        domSelect('.t-value',_this.view).innerHTML = "";
+        domSelect('.x-value',_this).innerHTML = 0;
+        domSelect('.y-value',_this).innerHTML = 0;
+        domSelect('.z-value',_this.view).innerHTML = 0;
+        domSelect('.t-value',_this.view).innerHTML = 0;
       });
 
       this.xInput.on('input', (e) => {
-        this.xValue = e.target.value;
+        this.xValue = e.target.valueAsNumber;
       });
       this.yInput.on('input', (e) => {
-        this.yValue = e.target.value;
+        this.yValue = e.target.valueAsNumber;
       });
       this.zInput.on('input', (e) => {
-        this.zValue =  e.target.value;
+        this.zValue =  e.target.valueAsNumber;
       });
       this.tInput.on('input', (e) => {
-        this.tValue =  e.target.value;
+        this.tValue =  e.target.valueAsNumber;
       });
 
       this.home.on( 'click', () =>{
