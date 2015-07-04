@@ -6,6 +6,7 @@ var Thermometer = require('../ui/Thermometer');
 var ControlPanel = require('../ui/ConcreteBar/ControlPanel');
 var Canvas = require('../ui/Canvas');
 var router = require('../router-main');
+var Chart = require('../libs/Chart');
 var calculateTemperature = require('../utils/CalculateTemperature');
 
 class ConcreteBar extends SpookyEl {
@@ -18,9 +19,10 @@ class ConcreteBar extends SpookyEl {
 
         super(data);
 
+        this.layerShown = false;
+
         this.title = new SpookyEl('.coffee-cup-title', this);
-       
-    
+
         this.thermometer = new Thermometer();
         this.thermometer.appendTo(this);
 
@@ -30,16 +32,41 @@ class ConcreteBar extends SpookyEl {
         this.canvas = new Canvas({isConcreteBar:true});
         this.canvas.appendTo(this);
 
+        this.chart = this.find('.temperatureChart');
+        this.closeIcon = new SpookyEl('.close-icon', this);
+
+        this.closeIcon.on( 'click', (e) => {
+            this.hideGraph();
+        });
+        this.closeIcon.on( 'mouseenter', () => {
+            if(this.layerShown){
+              TweenMax.to(this.closeIcon, 0.2, {
+                autoAlpha:0.6
+              });
+            }
+        });
+
+        this.closeIcon.on( 'mouseleave', () => {
+            if(this.layerShown){
+              TweenMax.to(this.closeIcon, 0.2, {
+                autoAlpha:1
+              });
+            }
+        });
+
+
+        this.layer = this.find('.layer');
 
         this.controlPanel.onCalculateTemperature.add(this.calculatePointerTemperature.bind(this));
+        this.controlPanel.onClickGraph.add(this.showGraph.bind(this));
 
         this.canvas.onCanvasReady.add(this.animate.bind(this));
 
         window.addEventListener( 'resize', this.resize.bind(this), false );
 
-    }
+     }
 
-    animateIn(){
+     animateIn(){
 
         var _this = this;
         TweenMax.fromTo(this, 0.5, {
@@ -63,7 +90,7 @@ class ConcreteBar extends SpookyEl {
     }
 
     animateOut(){
-        
+
         var _this = this;
         this.thermometer.animateOut();
 
@@ -89,6 +116,84 @@ class ConcreteBar extends SpookyEl {
         this.thermometer.setTemperature(temperature);
         this.canvas.addPoint(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue, temperature);
         this.canvas.addParticles(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue);
+        this.addGraph();
+    }
+
+    addGraph(){
+        var data = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [
+            {
+                label: "My First dataset",
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [65, 59, 80, 81, 56, 55, 40]
+            },
+            {
+                label: "My Second dataset",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: [28, 48, 40, 19, 86, 27, 90]
+            }
+            ]
+        };
+
+        var myLineChart = new Chart(this.chart._view.getContext("2d")).Line(data, {});
+    }
+
+    showGraph(){
+
+        TweenMax.to(this.layer, 0.5, {
+            autoAlpha:0.8,
+            zIndex: 20,
+            ease: Expo.easeOut
+        });
+
+        TweenMax.to(this.chart, 0.5, {
+            autoAlpha:1,
+            delay:0.3
+        });
+
+        TweenMax.to(this.closeIcon, 0.5, {
+            autoAlpha:1,
+            delay:0.4,
+            zIndex: 25,
+            ease: Expo.easeOut
+        });
+
+        this.layerShown = true;
+
+    }
+
+    hideGraph(){
+
+        TweenMax.to(this.layer, 0.5, {
+            autoAlpha:0,
+            delay:0.4,
+            zIndex: 0,
+            ease: Expo.easeOut
+        });
+
+        TweenMax.to(this.chart, 0.5, {
+            autoAlpha:0
+        });
+
+        TweenMax.to(this.closeIcon, 0.5, {
+            autoAlpha:0,
+            zIndex: 0,
+            ease: Expo.easeOut
+
+        });
+
+        this.layerShown = false;
     }
 
     resize(){

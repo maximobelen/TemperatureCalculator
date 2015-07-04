@@ -15,11 +15,13 @@ class ControlPanel extends SpookyEl {
         super(data);
 
         this.temperatureCalculate = new SpookyEl('.button-temperature', this);
+        this.graph = new SpookyEl('.button-graphic', this);
         this.home = new SpookyEl('.home-button', this);
         this.pointForm = new SpookyEl('.point-form', this);
         this.isEmpty = true;
 
         this.onCalculateTemperature = new Signal();
+        this.onClickGraph = new Signal();
 
         this.xInput =  new SpookyEl('.x-value', this);
         this.yInput =  new SpookyEl('.y-value', this);
@@ -67,6 +69,12 @@ class ControlPanel extends SpookyEl {
         domSelect('.t-value',_this.view).innerHTML = 0;
       });
 
+      this.graph.on( 'click', (e) => {
+        e.preventDefault();
+        _this.onClickGraph.dispatch();
+
+      });
+
       this.xInput.on('input', (e) => {
         this.xValue = e.target.valueAsNumber;
       });
@@ -86,26 +94,38 @@ class ControlPanel extends SpookyEl {
       } );
 
       this.temperatureCalculate.on( 'mouseenter', () => {
-          TweenMax.to(this.temperatureCalculate, 0.5, {
-            autoAlpha:1
+          TweenMax.to(this.temperatureCalculate, 0.2, {
+            autoAlpha:0.6
           });
       });
 
       this.home.on( 'mouseenter', () => {
-          TweenMax.to(this.home, 0.5, {
+          TweenMax.to(this.home, 0.2, {
+            autoAlpha:0.6
+          });
+      });
+
+      this.graph.on( 'mouseenter', () => {
+          TweenMax.to(this.graph, 0.2, {
+            autoAlpha:0.6
+          });
+      });
+
+      this.graph.on( 'mouseleave', () => {
+          TweenMax.to(this.graph, 0.2, {
+            autoAlpha:1
+          });
+      });
+      
+      this.home.on( 'mouseleave', () => {
+          TweenMax.to(this.home, 0.2, {
             autoAlpha:1
           });
       });
 
-      this.home.on( 'mouseleave', () => {
-          TweenMax.to(this.home, 0.5, {
-            autoAlpha:0.8
-          });
-      });
-
       this.temperatureCalculate.on( 'mouseleave', () => {
-          TweenMax.to(this.temperatureCalculate, 0.5, {
-            autoAlpha:0.8
+          TweenMax.to(this.temperatureCalculate, 0.2, {
+            autoAlpha:1
           });
       });
 

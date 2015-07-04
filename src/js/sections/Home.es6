@@ -96,30 +96,26 @@ class Home extends SpookyEl {
         });
 
         this.buttonConcreteBar.on( 'mouseenter', () => {
-            TweenMax.to(this.buttonConcreteBar, 0.5, {
-                autoAlpha:1,
-                color: '#e5c100'
+            TweenMax.to(this.buttonConcreteBar, 0.2, {
+                autoAlpha:0.6
             });
         });
 
         this.buttonCafe.on( 'mouseenter', () => {
-            TweenMax.to(this.buttonCafe, 0.5, {
-                autoAlpha:1,
-                color: '#e5c100'
+            TweenMax.to(this.buttonCafe, 0.2, {
+                autoAlpha:0.6
             });
         });
 
         this.buttonConcreteBar.on( 'mouseleave', () => {
-            TweenMax.to(this.buttonConcreteBar, 0.5, {
-                autoAlpha:0.7,
-                color: '#ffffff'
+            TweenMax.to(this.buttonConcreteBar, 0.2, {
+                autoAlpha:1
             });
         });
 
         this.buttonCafe.on( 'mouseleave', () => {
-            TweenMax.to(this.buttonCafe, 0.5, {
-                autoAlpha:0.7,
-                color: '#ffffff'
+            TweenMax.to(this.buttonCafe, 0.2, {
+                autoAlpha:1
             });
         });
     }
