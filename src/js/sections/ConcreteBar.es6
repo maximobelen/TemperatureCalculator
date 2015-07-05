@@ -79,11 +79,11 @@ class ConcreteBar extends SpookyEl {
                 _this.thermometer.animateIn();
                 _this.controlPanel.animateIn();
 
-                TweenMax.fromTo(_this.title, 2, {
+                TweenMax.fromTo(_this.title, 0.6, {
                     autoAlpha:0
                 }, {
                     autoAlpha:1,
-                    ease: Expo.easeIn
+                    ease: Expo.easeOut
                 });
             }
         });

@@ -26,7 +26,7 @@ class Thermometer extends SpookyEl {
         }, {
             y: 0,
             autoAlpha:1,
-            ease: Expo.easeIn
+            ease: Expo.easeOut
         });
       
     }
@@ -50,10 +50,11 @@ class Thermometer extends SpookyEl {
 
         var hundredPercent= 342;
 
-        var height = (hundredPercent * this.degrees) / 100
-        TweenMax.to(this.mercury, 1.5, {
-            height:height,
-            ease: Linear.easeIn
+        var height = (hundredPercent * this.degrees) / 100;
+        
+        TweenMax.to(this.mercury, 1, {
+            height: height,
+            ease: Linear.easeOut
             //top:this.mercury.top
         });
             

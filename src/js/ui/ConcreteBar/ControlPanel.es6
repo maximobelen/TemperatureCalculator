@@ -44,14 +44,14 @@ class ControlPanel extends SpookyEl {
             autoAlpha: 1
         }, {
             x: 0,
-            ease: Expo.easeIn
+            ease: Expo.easeOut
       });
 
       TweenMax.fromTo(this.home, 1.5, {
           autoAlpha:0
       }, {
           autoAlpha:0.8,
-          ease: Expo.easeIn
+          ease: Expo.easeOut
       });
 
       
