@@ -12,7 +12,6 @@ class Home extends SpookyEl {
          // renderer
 
         super(data);
-        
 
         this.buttonConcreteBar = new SpookyEl('.button-concrete-bar', this);
         this.buttonCafe = new SpookyEl('.button-coffee-cup', this);
