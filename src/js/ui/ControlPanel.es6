@@ -1,7 +1,7 @@
 var SpookyEl = require('spooky-element');
 var Signal = require('signals');
 var TweenMax = require('gsap');
-var router = require('../../router-main');
+var router = require('../router-main');
 var domSelect = require('dom-select');
 
 
@@ -10,7 +10,7 @@ class ControlPanel extends SpookyEl {
     constructor(data){
 
 
-        this.template = require('../../templates/ui/ConcreteBar/ControlPanel.hbs');
+        this.template = require('../templates/ui/ConcreteBar/ControlPanel.hbs');
 
         super(data);
 

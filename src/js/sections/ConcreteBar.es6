@@ -3,7 +3,7 @@ var THREE = require('three');
 var TweenMax = require('gsap');
 var Signal = require('signals');
 var Thermometer = require('../ui/Thermometer');
-var ControlPanel = require('../ui/ConcreteBar/ControlPanel');
+var ControlPanel = require('../ui/ControlPanel');
 var Canvas = require('../ui/Canvas');
 var router = require('../router-main');
 var Chart = require('../libs/Chart');
@@ -24,7 +24,7 @@ class ConcreteBar extends SpookyEl {
 
         this.layerShown = false;
 
-        this.title = new SpookyEl('.coffee-cup-title', this);
+        this.title = new SpookyEl('.concrete-bar-title', this);
 
         this.thermometer = new Thermometer();
         this.thermometer.appendTo(this);

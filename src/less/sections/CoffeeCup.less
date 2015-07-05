@@ -4,7 +4,41 @@
     background-color: #000000;
     height: 100%;
     width: 100%;
-  
+
+    .ui-concrete-bar-control-panel{
+        background: url('images/cafe-background.png');
+    }
+
+    .layer{
+        position: absolute;
+        opacity: 0.4;
+        visibility: hidden;
+        background-color: #000000;
+        height: 100%;
+        width: 100%;
+
+        .title{
+            text-align: center;
+            visibility: hidden;
+            font-family: Coda;
+            font-size: 40px;
+            color: #e5c100;
+            text-shadow: 3px 1px 30px #969627;
+        }
+    }
+
+    .close-icon{
+        position: absolute;
+        visibility: hidden;
+        background: url('images/close-icon.png');
+        height: 50px;
+        width: 50px;
+        right: 30px;
+        top: 30px;
+        background-size: contain;
+        cursor: pointer;
+    }
+
     .coffee-cup-title{
         visibility: hidden;
         color: white;
@@ -26,6 +60,20 @@
         font-size: 50px;
         color: #e5c100;
         text-shadow: 3px 1px 30px rgba(150, 150, 39, 1);
+    }
+
+    .temperatureChart{
+        position: absolute;
+        visibility: hidden;
+        z-index: 100;
+        background-color: white;
+        margin: auto;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        top: 0;
+        width: 75%;
+        height: 50%;
     }
 
 }
