@@ -117,6 +117,7 @@ class ConcreteBar extends SpookyEl {
         this.canvas.addPoint(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue, temperature);
         this.canvas.addParticles(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue);
         this.addGraph();
+        this.controlPanel.addGraphListeners();
     }
 
     addGraph(){
@@ -169,8 +170,9 @@ class ConcreteBar extends SpookyEl {
             ease: Expo.easeOut
         });
 
-        this.layerShown = true;
+        this.thermometer.animateOut();
 
+        this.layerShown = true;
     }
 
     hideGraph(){
@@ -192,6 +194,8 @@ class ConcreteBar extends SpookyEl {
             ease: Expo.easeOut
 
         });
+        
+        this.thermometer.animateIn();
 
         this.layerShown = false;
     }

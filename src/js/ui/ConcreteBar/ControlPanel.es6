@@ -57,6 +57,33 @@ class ControlPanel extends SpookyEl {
       
     }
 
+    addGraphListeners(){
+
+      TweenMax.to(this.graph, 0.2, {
+        autoAlpha:1
+      });
+  
+      
+      this.graph.on( 'click', (e) => {
+        e.preventDefault();
+        _this.onClickGraph.dispatch();
+
+      });
+
+      this.graph.on( 'mouseenter', () => {
+          TweenMax.to(this.graph, 0.2, {
+            autoAlpha:0.6
+          });
+      });
+
+      this.graph.on( 'mouseleave', () => {
+          TweenMax.to(this.graph, 0.2, {
+            autoAlpha:1
+          });
+      });
+      
+    }
+
     addListeners(){
       var _this = this;
       this.temperatureCalculate.on( 'click', (e) => {
@@ -67,12 +94,6 @@ class ControlPanel extends SpookyEl {
         domSelect('.y-value',_this).innerHTML = 0;
         domSelect('.z-value',_this.view).innerHTML = 0;
         domSelect('.t-value',_this.view).innerHTML = 0;
-      });
-
-      this.graph.on( 'click', (e) => {
-        e.preventDefault();
-        _this.onClickGraph.dispatch();
-
       });
 
       this.xInput.on('input', (e) => {
@@ -105,18 +126,6 @@ class ControlPanel extends SpookyEl {
           });
       });
 
-      this.graph.on( 'mouseenter', () => {
-          TweenMax.to(this.graph, 0.2, {
-            autoAlpha:0.6
-          });
-      });
-
-      this.graph.on( 'mouseleave', () => {
-          TweenMax.to(this.graph, 0.2, {
-            autoAlpha:1
-          });
-      });
-      
       this.home.on( 'mouseleave', () => {
           TweenMax.to(this.home, 0.2, {
             autoAlpha:1

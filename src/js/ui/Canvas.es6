@@ -97,6 +97,7 @@ class Canvas extends SpookyEl {
         this.animate();
 
     }
+    
     addParticles(x, y, z){
 
         // var selectedObject = this.scene.getObjectByName('particles');
