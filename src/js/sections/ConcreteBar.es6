@@ -35,6 +35,7 @@ class ConcreteBar extends SpookyEl {
         this.canvas.appendTo(this);
 
         this.chart = this.find('.temperatureChart');
+
         this.closeIcon = new SpookyEl('.close-icon', this);
 
         this.closeIcon.on( 'click', (e) => {
@@ -118,15 +119,18 @@ class ConcreteBar extends SpookyEl {
         this.thermometer.setTemperature(temperature);
         this.canvas.addPoint(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue, temperature);
         this.canvas.addParticles(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue);
-        this.addGraph();
 
         if(this.firstCalculation){
+            this.chartManager = new Chart(this.chart._view.getContext("2d"));
             this.controlPanel.addGraphListeners();
             this.firstCalculation = false;
         }
+
+        this.addGraph();
     }
 
     addGraph(){
+
         var data = {
             labels: ["January", "February", "March", "April", "May", "June", "July"],
             datasets: [
@@ -153,7 +157,8 @@ class ConcreteBar extends SpookyEl {
             ]
         };
 
-        var myLineChart = new Chart(this.chart._view.getContext("2d")).Line(data, {});
+        this.chartManager.Line(data, {});
+
     }
 
     showGraph(){
