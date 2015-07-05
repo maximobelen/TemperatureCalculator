@@ -9508,7 +9508,7 @@ mixes(SpookyElement, {
 
 module.exports = SpookyElement;
 
-},{"atts":20,"dom-css":21,"dom-event":26,"dom-select":28,"domify":30,"element-class":31,"inherits":32,"insert":36,"lodash":42,"mixes":43,"signals":45}],20:[function(require,module,exports){
+},{"atts":20,"dom-css":21,"dom-event":26,"dom-select":3,"domify":27,"element-class":28,"inherits":29,"insert":33,"lodash":39,"mixes":40,"signals":18}],20:[function(require,module,exports){
 /*!
  * atts 0.0.1+201311070728
  * https://github.com/ryanve/atts
@@ -9876,12 +9876,6 @@ function off (element, event, callback, capture) {
 }
 
 },{}],27:[function(require,module,exports){
-module.exports=require(2)
-},{"/Users/maximo/Documents/repositories/coffeeCup/node_modules/dom-select/fallback.js":2,"qwery":29}],28:[function(require,module,exports){
-module.exports=require(3)
-},{"./fallback":27,"/Users/maximo/Documents/repositories/coffeeCup/node_modules/dom-select/index.js":3}],29:[function(require,module,exports){
-module.exports=require(4)
-},{"/Users/maximo/Documents/repositories/coffeeCup/node_modules/dom-select/node_modules/qwery/qwery.js":4}],30:[function(require,module,exports){
 
 /**
  * Expose `parse`.
@@ -9991,7 +9985,7 @@ function parse(html, doc) {
   return fragment;
 }
 
-},{}],31:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 module.exports = function(opts) {
   return new ElementClass(opts)
 }
@@ -10045,7 +10039,7 @@ ElementClass.prototype.has = function(className) {
   return indexOf(classes, className) > -1
 }
 
-},{}],32:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -10070,7 +10064,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],33:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 var toArray = require("to-array")
 
     , mutation = require("./mutation")
@@ -10086,7 +10080,7 @@ function after(sibling, first) {
     return first
 }
 
-},{"./mutation":37,"to-array":38}],34:[function(require,module,exports){
+},{"./mutation":34,"to-array":35}],31:[function(require,module,exports){
 var toArray = require("to-array")
 
     , mutation = require("./mutation")
@@ -10099,7 +10093,7 @@ function append(parent, first) {
     return first
 }
 
-},{"./mutation":37,"to-array":38}],35:[function(require,module,exports){
+},{"./mutation":34,"to-array":35}],32:[function(require,module,exports){
 var toArray = require("to-array")
 
     , mutation = require("./mutation")
@@ -10114,7 +10108,7 @@ function before(sibling, first) {
     return first
 }
 
-},{"./mutation":37,"to-array":38}],36:[function(require,module,exports){
+},{"./mutation":34,"to-array":35}],33:[function(require,module,exports){
 var mutation = require("./mutation")
     , prepend = require("./prepend")
     , append = require("./append")
@@ -10133,7 +10127,7 @@ module.exports = {
     , mutation: mutation
 }
 
-},{"./after":33,"./append":34,"./before":35,"./mutation":37,"./prepend":39,"./remove":40,"./replace":41}],37:[function(require,module,exports){
+},{"./after":30,"./append":31,"./before":32,"./mutation":34,"./prepend":36,"./remove":37,"./replace":38}],34:[function(require,module,exports){
 module.exports = mutation
 
 function mutation(list) {
@@ -10162,7 +10156,7 @@ function appendToFragment(elem) {
     this.appendChild(elem)
 }
 
-},{}],38:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 module.exports = toArray
 
 function toArray(list, index) {
@@ -10177,7 +10171,7 @@ function toArray(list, index) {
     return array
 }
 
-},{}],39:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 var toArray = require("to-array")
 
     , mutation = require("./mutation")
@@ -10190,7 +10184,7 @@ function prepend(parent, first) {
     return first
 }
 
-},{"./mutation":37,"to-array":38}],40:[function(require,module,exports){
+},{"./mutation":34,"to-array":35}],37:[function(require,module,exports){
 var toArray = require("to-array")
 
     , mutation = require("./mutation")
@@ -10218,7 +10212,7 @@ function removeFromParent(elem) {
     elem.parentNode.removeChild(elem)
 }
 
-},{"./mutation":37,"to-array":38}],41:[function(require,module,exports){
+},{"./mutation":34,"to-array":35}],38:[function(require,module,exports){
 var toArray = require("to-array")
     , mutation = require("./mutation")
 
@@ -10232,7 +10226,7 @@ function replace(target, first) {
     return first
 }
 
-},{"./mutation":37,"to-array":38}],42:[function(require,module,exports){
+},{"./mutation":34,"to-array":35}],39:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -17022,7 +17016,7 @@ function replace(target, first) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],43:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 var xtend = require('xtend')
 
 var defaults = {
@@ -17049,7 +17043,7 @@ module.exports = function mixes(ctor, entries) {
 }
 
 module.exports.mix = mix
-},{"xtend":44}],44:[function(require,module,exports){
+},{"xtend":41}],41:[function(require,module,exports){
 module.exports = extend
 
 function extend() {
@@ -17068,9 +17062,7 @@ function extend() {
     return target
 }
 
-},{}],45:[function(require,module,exports){
-module.exports=require(18)
-},{"/Users/maximo/Documents/repositories/coffeeCup/node_modules/signals/dist/signals.js":18}],46:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 var Signal = require('signals').Signal;
 var traverse = require('traverse');
 
@@ -17150,9 +17142,7 @@ var SpookyModel = {
 }
 
 module.exports = SpookyModel;
-},{"signals":47,"traverse":48}],47:[function(require,module,exports){
-module.exports=require(18)
-},{"/Users/maximo/Documents/repositories/coffeeCup/node_modules/signals/dist/signals.js":18}],48:[function(require,module,exports){
+},{"signals":18,"traverse":43}],43:[function(require,module,exports){
 var traverse = module.exports = function (obj) {
     return new Traverse(obj);
 };
@@ -17468,7 +17458,7 @@ var hasOwnProperty = Object.hasOwnProperty || function (obj, key) {
     return key in obj;
 };
 
-},{}],49:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 var mixes = require('mixes');
 var _ = require('lodash');
 var on = require('dom-event');
@@ -17639,15 +17629,15 @@ mixes(SpookyRouter, {
 });
 
 module.exports = SpookyRouter;
-},{"dom-event":50,"lodash":51,"mixes":52,"route-parser":54,"signals":62,"spooky-element":19,"spooky-model":46,"spooky-view-manager":63}],50:[function(require,module,exports){
+},{"dom-event":45,"lodash":46,"mixes":47,"route-parser":49,"signals":18,"spooky-element":19,"spooky-model":42,"spooky-view-manager":57}],45:[function(require,module,exports){
 module.exports=require(26)
-},{"/Users/maximo/Documents/repositories/coffeeCup/node_modules/spooky-element/node_modules/dom-event/index.js":26}],51:[function(require,module,exports){
-module.exports=require(42)
-},{"/Users/maximo/Documents/repositories/coffeeCup/node_modules/spooky-element/node_modules/lodash/dist/lodash.js":42}],52:[function(require,module,exports){
-module.exports=require(43)
-},{"/Users/maximo/Documents/repositories/coffeeCup/node_modules/spooky-element/node_modules/mixes/index.js":43,"xtend":53}],53:[function(require,module,exports){
-module.exports=require(44)
-},{"/Users/maximo/Documents/repositories/coffeeCup/node_modules/spooky-element/node_modules/mixes/node_modules/xtend/immutable.js":44}],54:[function(require,module,exports){
+},{"/Users/maximo/Documents/repositories/TemperatureCalculator/node_modules/spooky-element/node_modules/dom-event/index.js":26}],46:[function(require,module,exports){
+module.exports=require(39)
+},{"/Users/maximo/Documents/repositories/TemperatureCalculator/node_modules/spooky-element/node_modules/lodash/dist/lodash.js":39}],47:[function(require,module,exports){
+module.exports=require(40)
+},{"/Users/maximo/Documents/repositories/TemperatureCalculator/node_modules/spooky-element/node_modules/mixes/index.js":40,"xtend":48}],48:[function(require,module,exports){
+module.exports=require(41)
+},{"/Users/maximo/Documents/repositories/TemperatureCalculator/node_modules/spooky-element/node_modules/mixes/node_modules/xtend/immutable.js":41}],49:[function(require,module,exports){
 /**
  * @module Passage
  */
@@ -17657,7 +17647,7 @@ var Route = require('./lib/route');
 
 
 module.exports = Route;
-},{"./lib/route":55}],55:[function(require,module,exports){
+},{"./lib/route":50}],50:[function(require,module,exports){
 'use strict';
 var Parser = require('./route/parser'),
     RegexpVisitor = require('./route/visitors/regexp'),
@@ -17720,7 +17710,7 @@ module.exports = function(spec) {
   route.ast = Parser.parse(spec);
   return route;
 }
-},{"./route/parser":58,"./route/visitors/regexp":60,"./route/visitors/reverse":61}],56:[function(require,module,exports){
+},{"./route/parser":53,"./route/visitors/regexp":55,"./route/visitors/reverse":56}],51:[function(require,module,exports){
 (function (process){
 /* parser generated by jison 0.4.13 */
 /*
@@ -18346,7 +18336,7 @@ if (typeof module !== 'undefined' && require.main === module) {
 }
 }
 }).call(this,require('_process'))
-},{"_process":8,"fs":6,"path":7}],57:[function(require,module,exports){
+},{"_process":8,"fs":6,"path":7}],52:[function(require,module,exports){
 'use strict';
 /** @module route/nodes */
 
@@ -18377,7 +18367,7 @@ module.exports = {
   Optional: createNode('Optional')
 };
 
-},{}],58:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 /**
  * @module route/parser
  */
@@ -18388,7 +18378,7 @@ var parser = require('./compiled-grammar').parser;
 parser.yy = require('./nodes');
 module.exports = parser;
 
-},{"./compiled-grammar":56,"./nodes":57}],59:[function(require,module,exports){
+},{"./compiled-grammar":51,"./nodes":52}],54:[function(require,module,exports){
 'use strict';
 /**
  * @module route/visitors/create_visitor
@@ -18427,7 +18417,7 @@ function createVisitor(handlers) {
 }
 
 module.exports = createVisitor;
-},{"../nodes":57}],60:[function(require,module,exports){
+},{"../nodes":52}],55:[function(require,module,exports){
 'use strict';
 
 var createVisitor  = require('./create_visitor'),
@@ -18525,7 +18515,7 @@ var RegexpVisitor = createVisitor({
 });
 
 module.exports = RegexpVisitor;
-},{"./create_visitor":59}],61:[function(require,module,exports){
+},{"./create_visitor":54}],56:[function(require,module,exports){
 'use strict';
 
 var createVisitor  = require('./create_visitor');
@@ -18593,9 +18583,7 @@ var ReverseVisitor = createVisitor({
 });
 
 module.exports = ReverseVisitor;
-},{"./create_visitor":59}],62:[function(require,module,exports){
-module.exports=require(18)
-},{"/Users/maximo/Documents/repositories/coffeeCup/node_modules/signals/dist/signals.js":18}],63:[function(require,module,exports){
+},{"./create_visitor":54}],57:[function(require,module,exports){
 var mixes = require('mixes');
 var _ = require('lodash');
 var SpookyEl = require('spooky-element');
@@ -18665,7 +18653,7 @@ mixes(SpookyViewManager, {
 });
 
 module.exports = SpookyViewManager;
-},{"lodash":51,"mixes":52,"spooky-element":19}],64:[function(require,module,exports){
+},{"lodash":46,"mixes":47,"spooky-element":19}],58:[function(require,module,exports){
 module.exports = function(THREE) {
     var MOUSE = THREE.MOUSE
     if (!MOUSE)
@@ -19347,7 +19335,7 @@ module.exports = function(THREE) {
     OrbitControls.prototype.constructor = OrbitControls;
     return OrbitControls;
 }
-},{}],65:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 var self = self || {};// File:src/Three.js
 
 /**
@@ -54495,7 +54483,7 @@ if (typeof exports !== 'undefined') {
   this['THREE'] = THREE;
 }
 
-},{}],66:[function(require,module,exports){
+},{}],60:[function(require,module,exports){
 /*!
  * Chart.js
  * http://chartjs.org/
@@ -57973,7 +57961,7 @@ if (typeof exports !== 'undefined') {
 
 
 }).call(this);
-},{}],67:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
 var model = require('spooky-model');
 // Setup model
 model.init(require('./models/site'));
@@ -58013,7 +58001,7 @@ domReady(function(){
 
 });
 
-},{"./models/site":68,"./router-main":69,"./sections/CoffeeCup":70,"./sections/ConcreteBar":71,"./sections/Home":72,"dom-event":1,"domready":5,"spooky-model":46}],68:[function(require,module,exports){
+},{"./models/site":62,"./router-main":63,"./sections/CoffeeCup":64,"./sections/ConcreteBar":65,"./sections/Home":66,"dom-event":1,"domready":5,"spooky-model":42}],62:[function(require,module,exports){
 var site = {
 
     home: {},
@@ -58022,13 +58010,13 @@ var site = {
 };
 
 module.exports = site;
-},{}],69:[function(require,module,exports){
+},{}],63:[function(require,module,exports){
 var Router = require('spooky-router');
 
 var router = new Router();
 
 module.exports = router;
-},{"spooky-router":49}],70:[function(require,module,exports){
+},{"spooky-router":44}],64:[function(require,module,exports){
 "use strict";
 
 var _createClass = (function () { function defineProperties(target, props) { for (var key in props) { var prop = props[key]; prop.configurable = true; if (prop.value) prop.writable = true; } Object.defineProperties(target, props); } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -58160,7 +58148,7 @@ var CoffeeCup = (function (_SpookyEl) {
 
 module.exports = CoffeeCup;
 
-},{"../router-main":69,"../templates/sections/CoffeeCup.hbs":73,"../ui/Canvas":80,"../ui/CoffeeCup/ControlPanel":81,"../ui/Thermometer":83,"gsap":9,"signals":18,"spooky-element":19,"three":65}],71:[function(require,module,exports){
+},{"../router-main":63,"../templates/sections/CoffeeCup.hbs":67,"../ui/Canvas":74,"../ui/CoffeeCup/ControlPanel":75,"../ui/Thermometer":77,"gsap":9,"signals":18,"spooky-element":19,"three":59}],65:[function(require,module,exports){
 "use strict";
 
 var _createClass = (function () { function defineProperties(target, props) { for (var key in props) { var prop = props[key]; prop.configurable = true; if (prop.value) prop.writable = true; } Object.defineProperties(target, props); } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -58444,7 +58432,7 @@ var ConcreteBar = (function (_SpookyEl) {
 
 module.exports = ConcreteBar;
 
-},{"../libs/Chart":66,"../router-main":69,"../templates/sections/ConcreteBar.hbs":74,"../ui/Canvas":80,"../ui/ConcreteBar/ControlPanel":82,"../ui/Thermometer":83,"../utils/CalculateTemperature":84,"dom-select":3,"gsap":9,"signals":18,"spooky-element":19,"three":65}],72:[function(require,module,exports){
+},{"../libs/Chart":60,"../router-main":63,"../templates/sections/ConcreteBar.hbs":68,"../ui/Canvas":74,"../ui/ConcreteBar/ControlPanel":76,"../ui/Thermometer":77,"../utils/CalculateTemperature":78,"dom-select":3,"gsap":9,"signals":18,"spooky-element":19,"three":59}],66:[function(require,module,exports){
 "use strict";
 
 var _createClass = (function () { function defineProperties(target, props) { for (var key in props) { var prop = props[key]; prop.configurable = true; if (prop.value) prop.writable = true; } Object.defineProperties(target, props); } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -58514,23 +58502,25 @@ var Home = (function (_SpookyEl) {
 
                 var _this = this;
 
-                TweenMax.fromTo(this.title, 0.2, {
+                TweenMax.fromTo(this.title, 0.4, {
                     autoAlpha: 1
                 }, {
                     autoAlpha: 0,
                     ease: Expo.easeOut
                 });
 
-                TweenMax.fromTo(this.buttonsContainer, 0.2, {
+                TweenMax.fromTo(this.buttonsContainer, 0.4, {
                     autoAlpha: 1
                 }, {
                     autoAlpha: 0,
                     ease: Expo.easeOut
                 });
-                TweenMax.fromTo(this.footer, 0.2, {
+
+                TweenMax.fromTo(this.footer, 0.4, {
                     autoAlpha: 1
                 }, {
                     autoAlpha: 0,
+                    delay: 0.4,
                     ease: Expo.easeOut,
                     onComplete: function onComplete() {
                         _this.remove();
@@ -58592,56 +58582,56 @@ var Home = (function (_SpookyEl) {
 
 module.exports = Home;
 
-},{"../router-main":69,"../templates/sections/Home.hbs":75,"gsap":9,"signals":18,"spooky-element":19,"three":65}],73:[function(require,module,exports){
+},{"../router-main":63,"../templates/sections/Home.hbs":69,"gsap":9,"signals":18,"spooky-element":19,"three":59}],67:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   return "<div class=\"section-coffee-cup\">\n  <div class=\"coffee-cup-title\">\n    <span class=\"coffee-cup-title-cafe\">Café</span>\n    <span class=\"coffee-cup-title-num\">NUMÉRICO</span>\n  </div>\n</div>\n";
   },"useData":true});
 
-},{"hbsfy/runtime":17}],74:[function(require,module,exports){
+},{"hbsfy/runtime":17}],68:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   return "<div class=\"section-coffee-cup\">\n  <div class=\"layer\">\n    <h1 class=\"title\"></h1>\n  </div>\n  <div class=\"close-icon\"></div>\n  <div class=\"coffee-cup-title\">\n    <span class=\"coffee-cup-title-cafe\">Barra de</span>\n    <span class=\"coffee-cup-title-num\">HORMIGÓN</span>\n  </div>\n</div>";
   },"useData":true});
 
-},{"hbsfy/runtime":17}],75:[function(require,module,exports){
+},{"hbsfy/runtime":17}],69:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   return "<div class=\"section-home\">\n  <div class=\"home-title\">\n    <span class=\"home-title-calculo\">Cálculo</span>\n    <span class=\"home-title-num\">NUMÉRICO</span>\n  </div>\n  <div class=\"buttons-container\">\n    <button class=\"generic-button button-concrete-bar\" type=\"button\">Barra de Concreto</button>\n    <button class=\"generic-button button-coffee-cup\" type=\"button\">Taza de café</button>\n  </div>\n    <div class=\"home-footer\">\n      <div class=\"credits\">\n        <span class=\"credits-name\">Máximo Belén</span>\n        </br>\n        <span class=\"credits-name\">Manuel Alonso</span>\n      </div>\n    </div>\n</div>";
   },"useData":true});
 
-},{"hbsfy/runtime":17}],76:[function(require,module,exports){
+},{"hbsfy/runtime":17}],70:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   return "  <div class=\"ui-canvas-container\"></div>\n";
   },"useData":true});
 
-},{"hbsfy/runtime":17}],77:[function(require,module,exports){
+},{"hbsfy/runtime":17}],71:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   return "<div class=\"ui-coffee-cup-control-panel\">\n  <div class=\"home-button\"></div>\n  <button class=\"generic-button button-add-cafe\" type=\"button\">Add Cafe!</button>\n  <button class=\"generic-button button-temperature\" type=\"button\">Calculate temperature</button>\n  <div class=\"credits\">\n    <span class=\"credits-title\">By</span>\n    </br>\n    <span class=\"credits-name\">Máximo Belén</span>\n    </br>\n    <span class=\"credits-name\">Manuel Alonso</span>\n  </div>\n</div>";
   },"useData":true});
 
-},{"hbsfy/runtime":17}],78:[function(require,module,exports){
+},{"hbsfy/runtime":17}],72:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   return "<div class=\"ui-concrete-bar-control-panel\">\n  <div class=\"home-button\"></div>\n  <form class='point-form'>\n    VALOR DE X:<br>\n    <input class='x-value' type=\"number\" name=\"0 a 1O\" >\n    <br>\n    VALOR DE Y:<br>\n    <input class='y-value' type=\"number\" name=\"y\" >\n    <br>\n    VALOR DE Z:<br>\n    <input class='z-value' type=\"number\" name=\"z\" >\n    <br>\n    TIEMPO:<br>\n    <input class='t-value' type=\"number\" name=\"time\">\n    <br><br>\n    <button class=\"generic-button button-temperature\" type=\"button\">Calcular Temperatura</button>\n    <br>\n    <button class=\"generic-button button-graphic disable\" type=\"button\">Graficar</button>\n  </form>\n</div>";
   },"useData":true});
 
-},{"hbsfy/runtime":17}],79:[function(require,module,exports){
+},{"hbsfy/runtime":17}],73:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   return "<div class=\"ui-thermometer\">\n   <div class=\"mercury\"></div>\n   <div class=\"degrees\">0</div>\n   <div class=\"messure\">ºC</div>\n</div>";
   },"useData":true});
 
-},{"hbsfy/runtime":17}],80:[function(require,module,exports){
+},{"hbsfy/runtime":17}],74:[function(require,module,exports){
 "use strict";
 
 var _createClass = (function () { function defineProperties(target, props) { for (var key in props) { var prop = props[key]; prop.configurable = true; if (prop.value) prop.writable = true; } Object.defineProperties(target, props); } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -58683,7 +58673,7 @@ var Canvas = (function (_SpookyEl) {
         this.view.appendChild(this.renderer.domElement);
 
         // camera
-        this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 5000);
+        this.camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 5000);
 
         this.onCanvasReady = new Signal();
         // scene
@@ -58704,8 +58694,8 @@ var Canvas = (function (_SpookyEl) {
             this.cube.position.z = zSize / 2;
             this.scene.add(this.cube);
 
-            this.camera.position.x = 30;
-            this.camera.position.y = 0;
+            this.camera.position.x = 20;
+            this.camera.position.y = 10;
             this.camera.position.z = 20;
         } else {
 
@@ -58841,7 +58831,7 @@ module.exports = Canvas;
 // this.scene.add(particleSystem);
 // this.animate();
 
-},{"../templates/ui/Canvas.hbs":76,"../ui/Thermometer":83,"../utils/colorTempToRGB":85,"dom-select":3,"gsap":9,"signals":18,"spooky-element":19,"three":65,"three-orbit-controls":64}],81:[function(require,module,exports){
+},{"../templates/ui/Canvas.hbs":70,"../ui/Thermometer":77,"../utils/colorTempToRGB":79,"dom-select":3,"gsap":9,"signals":18,"spooky-element":19,"three":59,"three-orbit-controls":58}],75:[function(require,module,exports){
 "use strict";
 
 var _createClass = (function () { function defineProperties(target, props) { for (var key in props) { var prop = props[key]; prop.configurable = true; if (prop.value) prop.writable = true; } Object.defineProperties(target, props); } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -58974,7 +58964,7 @@ var ControlPanel = (function (_SpookyEl) {
 
 module.exports = ControlPanel;
 
-},{"../../router-main":69,"../../templates/ui/CoffeeCup/ControlPanel.hbs":77,"gsap":9,"signals":18,"spooky-element":19}],82:[function(require,module,exports){
+},{"../../router-main":63,"../../templates/ui/CoffeeCup/ControlPanel.hbs":71,"gsap":9,"signals":18,"spooky-element":19}],76:[function(require,module,exports){
 "use strict";
 
 var _createClass = (function () { function defineProperties(target, props) { for (var key in props) { var prop = props[key]; prop.configurable = true; if (prop.value) prop.writable = true; } Object.defineProperties(target, props); } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -59136,7 +59126,7 @@ var ControlPanel = (function (_SpookyEl) {
 
 module.exports = ControlPanel;
 
-},{"../../router-main":69,"../../templates/ui/ConcreteBar/ControlPanel.hbs":78,"dom-select":3,"gsap":9,"signals":18,"spooky-element":19}],83:[function(require,module,exports){
+},{"../../router-main":63,"../../templates/ui/ConcreteBar/ControlPanel.hbs":72,"dom-select":3,"gsap":9,"signals":18,"spooky-element":19}],77:[function(require,module,exports){
 "use strict";
 
 var _createClass = (function () { function defineProperties(target, props) { for (var key in props) { var prop = props[key]; prop.configurable = true; if (prop.value) prop.writable = true; } Object.defineProperties(target, props); } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -59234,7 +59224,7 @@ var Thermometer = (function (_SpookyEl) {
 
 module.exports = Thermometer;
 
-},{"../templates/ui/Thermometer.hbs":79,"dom-select":3,"gsap":9,"spooky-element":19}],84:[function(require,module,exports){
+},{"../templates/ui/Thermometer.hbs":73,"dom-select":3,"gsap":9,"spooky-element":19}],78:[function(require,module,exports){
 var model = require('spooky-model');
 
 var Lx = 10;
@@ -59299,7 +59289,7 @@ var CalculateTemperature = {
 module.exports = CalculateTemperature;
 
 
-},{"spooky-model":46}],85:[function(require,module,exports){
+},{"spooky-model":42}],79:[function(require,module,exports){
 // From http://www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code/
  
     // Start with a temperature, in Kelvin, somewhere between 1000 and 40000.  (Other values may work,
@@ -59368,4 +59358,4 @@ function clamp( x, min, max ) {
 }
 
 module.exports = colorTemperatureToRGB;
-},{}]},{},[67]);
+},{}]},{},[61]);
