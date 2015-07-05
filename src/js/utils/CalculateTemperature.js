@@ -16,21 +16,48 @@ Nz = Lz/h;
 var ambientTemperature = 25;
 var temps = model.getContent('bar').temperatures;
 
-function CalculateTemperature(x, y, z, t) {
+
+var CalculateTemperature = {
+
+  calculateTemperature: function (x, y, z, t) {
 
     if( (x >= -5 && x <= 5) && (y >= -2.5 && y <= 2.5)  && (z >= -1  && z <= 1)){
-      var i = returnIndex(x, y, z, t);
+      var i = this.returnIndex(x, y, z, t);
       return temps[i];
 
     }else{
 
       return ambientTemperature;
     }
-}
+  },
 
-function returnIndex(x, y, z, t) {
-    var index = z + (Nz + 1) * y + ((Ny + 1) * (Nz + 1)) * x + ((Nz + 1) * (Ny + 1) * (Nx + 1)) * t;
-    return index;
-}
+  returnIndex: function (x, y, z, t) {
+      var index = z + (Nz + 1) * y + ((Ny + 1) * (Nz + 1)) * x + ((Nz + 1) * (Ny + 1) * (Nx + 1)) * t;
+      return index;
+  },
+
+  getTempsForPoint:function (x, y, z) {
+      
+      var temperatures = [];
+      
+      for(var i = 0; i < Nt; i++){
+        var index = this.returnIndex(x, y, z, i);
+        temperatures.push(temps[index]);
+      }
+      return temperatures;
+  },
+
+  getLabelsForTemps:function () {
+      
+      var labels = [];
+      
+      for(var i = 0; i < Nt; i++){
+        labels.push(i);
+      }
+      return labels;
+  }
+
+};
 
 module.exports = CalculateTemperature;
+

@@ -34,8 +34,6 @@ class ConcreteBar extends SpookyEl {
         this.canvas = new Canvas({isConcreteBar:true});
         this.canvas.appendTo(this);
 
-        this.chart = this.find('.temperatureChart');
-
         this.closeIcon = new SpookyEl('.close-icon', this);
 
         this.closeIcon.on( 'click', (e) => {
@@ -114,25 +112,36 @@ class ConcreteBar extends SpookyEl {
     }
 
     calculatePointerTemperature(){
-        var temperature = calculateTemperature(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue, this.controlPanel.tValue);
+        var temperature = calculateTemperature.calculateTemperature(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue, this.controlPanel.tValue);
         temperature = Math.round(temperature * 100) / 100;
         this.thermometer.setTemperature(temperature);
         this.canvas.addPoint(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue, temperature);
         this.canvas.addParticles(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue);
 
         if(this.firstCalculation){
-            this.chartManager = new Chart(this.chart._view.getContext("2d"));
             this.controlPanel.addGraphListeners();
             this.firstCalculation = false;
         }
 
-        this.addGraph();
+        this.addGraph(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue);
     }
 
-    addGraph(){
+    addGraph(x, y, z){
+        
+        if(this.find('.temperatureChart')!= null){
+            this.find('.temperatureChart').remove(); 
+        }
+        
+        this.append('<canvas class="temperatureChart"><canvas>');
+        
+        this.chart = this.find('.temperatureChart');
+        this.chartManager = new Chart(this.chart._view.getContext("2d"));
+
+        var dataset = calculateTemperature.getTempsForPoint(x, y, z);
+        var labels = calculateTemperature.getLabelsForTemps();
 
         var data = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            labels: labels,
             datasets: [
             {
                 label: "My First dataset",
@@ -142,21 +151,10 @@ class ConcreteBar extends SpookyEl {
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(220,220,220,1)",
-                data: [65, 59, 80, 81, 56, 55, 40]
-            },
-            {
-                label: "My Second dataset",
-                fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(151,187,205,1)",
-                data: [28, 48, 40, 19, 86, 27, 90]
-            }
-            ]
+                data: dataset
+            }]
         };
-
+        console.log();
         this.chartManager.Line(data, {});
 
     }
