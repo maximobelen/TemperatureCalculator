@@ -8,6 +8,7 @@ var Canvas = require('../ui/Canvas');
 var router = require('../router-main');
 var Chart = require('../libs/Chart');
 var calculateTemperature = require('../utils/CalculateTemperature');
+var domSelect = require('dom-select');
 
 class ConcreteBar extends SpookyEl {
 
@@ -57,6 +58,7 @@ class ConcreteBar extends SpookyEl {
 
 
         this.layer = this.find('.layer');
+        this.layer.title = this.layer.find('.title');
 
         this.controlPanel.onCalculateTemperature.add(this.calculatePointerTemperature.bind(this));
         this.controlPanel.onClickGraph.add(this.showGraph.bind(this));
@@ -144,7 +146,7 @@ class ConcreteBar extends SpookyEl {
             labels: labels,
             datasets: [
             {
-                label: "My First dataset",
+                label: "Temperaturas del punto ("+x+", "+y+", "+z+")",
                 fillColor: "rgba(220,220,220,0.2)",
                 strokeColor: "rgba(220,220,220,1)",
                 pointColor: "rgba(220,220,220,1)",
@@ -154,27 +156,46 @@ class ConcreteBar extends SpookyEl {
                 data: dataset
             }]
         };
-        console.log();
+        
+        domSelect('.title',this.view).innerHTML = "Temperaturas del punto ("+x+", "+y+", "+z+")";
+
         this.chartManager.Line(data, {});
 
     }
 
     showGraph(){
 
-        TweenMax.to(this.layer, 0.5, {
+        TweenMax.to(this.title, 0.4, {
+            autoAlpha:0,
+            ease: Expo.easeOut
+        });
+
+        TweenMax.to(this.layer, 0.4, {
             autoAlpha:0.8,
             zIndex: 20,
+            ease: Expo.easeOut,
+            delay: 0.2
+        });
+
+        TweenMax.fromTo(this.layer.title, 0.4, {
+            autoAlpha:0,
+            y: -200
+            },
+            {
+            y:0,
+            delay: 0.5,
+            autoAlpha:1,
             ease: Expo.easeOut
         });
 
         TweenMax.to(this.chart, 0.5, {
             autoAlpha:1,
-            delay:0.3
+            delay:0.5
         });
 
         TweenMax.to(this.closeIcon, 0.5, {
             autoAlpha:1,
-            delay:0.4,
+            delay:0.5,
             zIndex: 25,
             ease: Expo.easeOut
         });
@@ -186,11 +207,13 @@ class ConcreteBar extends SpookyEl {
 
     hideGraph(){
 
-        TweenMax.to(this.layer, 0.5, {
-            autoAlpha:0,
-            delay:0.4,
-            zIndex: 0,
-            ease: Expo.easeOut
+        TweenMax.fromTo(this.layer.title, 0.5, {
+            autoAlpha:1,
+            y: 0
+            },
+            {
+            y:-200,
+            autoAlpha:0
         });
 
         TweenMax.to(this.chart, 0.5, {
@@ -203,7 +226,19 @@ class ConcreteBar extends SpookyEl {
             ease: Expo.easeOut
 
         });
-        
+
+        TweenMax.to(this.layer, 0.5, {
+            autoAlpha:0,
+            delay:0.4,
+            zIndex: 0,
+            onComplete: function(){
+                TweenMax.to(this.title, 0.4, {
+                    autoAlpha:1,
+                    ease: Expo.easeOutç
+                });
+            }.bind(this)
+        });
+
         this.thermometer.animateIn();
 
         this.layerShown = false;
