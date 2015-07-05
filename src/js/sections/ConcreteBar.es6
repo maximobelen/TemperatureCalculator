@@ -19,6 +19,8 @@ class ConcreteBar extends SpookyEl {
 
         super(data);
 
+        this.firstCalculation = true;
+
         this.layerShown = false;
 
         this.title = new SpookyEl('.coffee-cup-title', this);
@@ -117,7 +119,11 @@ class ConcreteBar extends SpookyEl {
         this.canvas.addPoint(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue, temperature);
         this.canvas.addParticles(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue);
         this.addGraph();
-        this.controlPanel.addGraphListeners();
+
+        if(this.firstCalculation){
+            this.controlPanel.addGraphListeners();
+            this.firstCalculation = false;
+        }
     }
 
     addGraph(){

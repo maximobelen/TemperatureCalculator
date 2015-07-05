@@ -41,7 +41,7 @@ class Canvas extends SpookyEl {
             var xSize = 10,
             ySize = 2,
             zSize = 5;
-            this.cube = new THREE.Mesh( new THREE.CubeGeometry( xSize, ySize, zSize), material );
+            this.cube = new THREE.Mesh( new THREE.BoxGeometry( xSize, ySize, zSize), material );
             this.cube.position.x = xSize/2;
             this.cube.position.y = ySize/2;
             this.cube.position.z = zSize/2;

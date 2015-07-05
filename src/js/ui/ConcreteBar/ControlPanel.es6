@@ -81,6 +81,8 @@ class ControlPanel extends SpookyEl {
             autoAlpha:1
           });
       });
+
+      this.graph.removeClass('disable');
       
     }
 
