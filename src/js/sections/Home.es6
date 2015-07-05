@@ -56,23 +56,25 @@ class Home extends SpookyEl {
 
         var _this = this;
 
-        TweenMax.fromTo(this.title, 0.2, {
+        TweenMax.fromTo(this.title, 0.4, {
             autoAlpha:1
         }, {
             autoAlpha:0,
             ease: Expo.easeOut
         });
 
-        TweenMax.fromTo(this.buttonsContainer, 0.2, {
+        TweenMax.fromTo(this.buttonsContainer, 0.4, {
             autoAlpha:1
         }, {
             autoAlpha:0,
             ease: Expo.easeOut
         });
-        TweenMax.fromTo(this.footer, 0.2, {
+
+        TweenMax.fromTo(this.footer, 0.4, {
             autoAlpha:1
         }, {
             autoAlpha:0,
+            delay: 0.4,
             ease: Expo.easeOut,
             onComplete:function(){
                 _this.remove();
@@ -120,7 +122,10 @@ class Home extends SpookyEl {
     }
 
     paramsChanged(params) {
-        console.log('navigating to '+params);
+        console.log('Navigating to --> '+router.currentRoute.name);
+        if(router.currentRoute.name != 'home'){
+            this.animateOut();
+        }
     }
 
 }

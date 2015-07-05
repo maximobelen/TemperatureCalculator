@@ -66,7 +66,7 @@ class ControlPanel extends SpookyEl {
       
       this.graph.on( 'click', (e) => {
         e.preventDefault();
-        _this.onClickGraph.dispatch();
+        this.onClickGraph.dispatch();
 
       });
 

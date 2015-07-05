@@ -26,7 +26,7 @@ class Canvas extends SpookyEl {
         this.view.appendChild(this.renderer.domElement);
 
         // camera
-        this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 5000);
+        this.camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 5000);
 
         this.onCanvasReady = new Signal();
         // scene
@@ -47,8 +47,8 @@ class Canvas extends SpookyEl {
             this.cube.position.z = zSize/2;
             this.scene.add( this.cube );
 
-            this.camera.position.x = 30;
-            this.camera.position.y = 0;
+            this.camera.position.x = 20;
+            this.camera.position.y = 10;
             this.camera.position.z = 20;
 
         }else{

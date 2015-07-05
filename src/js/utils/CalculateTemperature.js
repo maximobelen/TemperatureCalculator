@@ -21,7 +21,7 @@ var CalculateTemperature = {
 
   calculateTemperature: function (x, y, z, t) {
 
-    if( (x >= -5 && x <= 5) && (y >= -2.5 && y <= 2.5)  && (z >= -1  && z <= 1)){
+    if( (x >= 0 && x <= 10) && (y >= 0 && y <= 2)  && (z >= 0  && z <= 5)){
       var i = this.returnIndex(x, y, z, t);
       return temps[i];
 
