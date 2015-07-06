@@ -18,6 +18,9 @@ class ControlPanel extends SpookyEl {
         this.graph = new SpookyEl('.button-graphic', this);
         this.graphMaxTemp = new SpookyEl('.button-graphic-max-temp', this);
 
+        this.planeInput =  new SpookyEl('.plane-value', this);
+        this.planeButton = new SpookyEl('.button-plane', this);
+
         this.home = new SpookyEl('.home-button', this);
         this.pointForm = new SpookyEl('.point-form', this);
         this.isEmpty = true;
@@ -25,6 +28,7 @@ class ControlPanel extends SpookyEl {
         this.onCalculateTemperature = new Signal();
         this.onClickGraph = new Signal();
         this.onClickMaxTemp = new Signal();
+        this.onPlaneButtonClick = new Signal();
 
         this.xInput =  new SpookyEl('.x-value', this);
         this.yInput =  new SpookyEl('.y-value', this);
@@ -35,6 +39,7 @@ class ControlPanel extends SpookyEl {
         this.yValue = 0;
         this.zValue = 0;
         this.tValue = 0;
+        this.planeValue = "";
 
         this.addListeners();
 
@@ -102,6 +107,29 @@ class ControlPanel extends SpookyEl {
         this.onClickMaxTemp.dispatch();
       });
 
+      this.planeButton.on( 'click', (e) => {
+        var badRequest = true;
+        var planeName = this.planeValue.charAt(0);
+        if(planeName == "x" || planeName == "y" || planeName == "z"){
+          if(this.planeValue.charAt(1) == " "){
+            var coordenate = parseFloat(this.planeValue.substring(2, this.planeValue.length));
+            if(typeof coordenate == "number" && !isNaN(coordenate)){
+              this.onPlaneButtonClick.dispatch();
+              domSelect('.plane-value', this.view).innerHTML = "";
+              badRequest = false;
+            }
+          }
+        }
+        if(badRequest){
+          alert("El formato ingresado debe de tener el nombre del plano (x, y, z), un espacio y la coordenada. Por ejemplo: 'x 5' ");
+        }
+
+      });
+
+      this.planeInput.on('input', (e) => {
+        this.planeValue =  e.target.value;
+        
+      });
       this.xInput.on('input', (e) => {
         this.xValue = e.target.valueAsNumber;
       });

@@ -97,43 +97,6 @@ class Canvas extends SpookyEl {
         this.animate();
 
     }
-    
-    addParticles(x, y, z){
-
-        // var selectedObject = this.scene.getObjectByName('particles');
-        // this.scene.remove( selectedObject );
-
-        // var particles = new THREE.Geometry;
-
-        // var colors = [];
-
-        // for (var p = 0; p < 2000; p++) {
-        //     var vector = this.randomSpherePoint(x , y, z, 1);
-        //     var particle = new THREE.Vector3(vector[0],vector[1] ,vector[2] );
-        //     var temperature = Math.floor((Math.random() * 100) + 1);
-        //     var rgb = colorTemperatureToRGB(temperature);
-        //     var colorString = "rgb("+rgb.r+","+rgb.g+","+rgb.b+")";
-        //     colors[p] = new THREE.Color( colorString );
-        //     particles.vertices.push(particle);
-
-        // }
-
-        // particles.colors = colors;
-
-        // // material
-        // var material = new THREE.PointCloudMaterial( {
-        //     size: 0.01,
-        //     transparent: false,
-        //     opacity: 1,
-        //     vertexColors: THREE.VertexColors
-        // } );
-
-        // var particleSystem = new THREE.PointCloud(particles, material);
-        // particleSystem.name = "particles";
-        // this.scene.add(particleSystem);
-        // this.animate();
-    }
-
 
     addPoint(x,y,z, temperature){
 

@@ -66,7 +66,6 @@ var CalculateTemperature = {
         maxTemperatures.push(max);
       }
 
-      console.log(maxTemperatures);
       return maxTemperatures;
   },
 
