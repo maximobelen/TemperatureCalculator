@@ -7,7 +7,7 @@ var ControlPanel = require('../ui/ControlPanel');
 var Canvas = require('../ui/Canvas');
 var router = require('../router-main');
 var Chart = require('../libs/Chart');
-var calculateTemperature = require('../utils/CalculateTemperature');
+var calculateTemperature = require('../utils/CalculateCilinderTemperature');
 var domSelect = require('dom-select');
 
 class CoffeeCup extends SpookyEl {
@@ -62,7 +62,9 @@ class CoffeeCup extends SpookyEl {
         this.layer.title = this.layer.find('.title');
 
         this.controlPanel.onCalculateTemperature.add(this.calculatePointerTemperature.bind(this));
-        this.controlPanel.onClickGraph.add(this.showGraph.bind(this));
+        this.controlPanel.onClickGraph.add(this.calculatePointGraph.bind(this));
+        this.controlPanel.onClickMaxTemp.add(this.calculateMaxTempGraph.bind(this));
+        this.controlPanel.onPlaneButtonClick.add(this.calculatePlaneTemp.bind(this));
 
         this.canvas.onCanvasReady.add(this.animate.bind(this));
 
@@ -119,26 +121,16 @@ class CoffeeCup extends SpookyEl {
         temperature = Math.round(temperature * 100) / 100;
         this.thermometer.setTemperature(temperature);
         this.canvas.addPoint(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue, temperature);
-        this.canvas.addParticles(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue);
 
         if(this.firstCalculation){
             this.controlPanel.addGraphListeners();
             this.firstCalculation = false;
         }
-
-        this.addGraph(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue);
     }
 
-    addGraph(x, y, z){
+        addPointGraph(x, y, z){
         
-        if(this.find('.temperatureChart')!= null){
-            this.find('.temperatureChart').remove(); 
-        }
-        
-        this.append('<canvas class="temperatureChart"><canvas>');
-        
-        this.chart = this.find('.temperatureChart');
-        this.chartManager = new Chart(this.chart._view.getContext("2d"));
+        this.cleanGraph();
 
         var dataset = calculateTemperature.getTempsForPoint(x, y, z);
         var labels = calculateTemperature.getLabelsForTemps();
@@ -162,6 +154,92 @@ class CoffeeCup extends SpookyEl {
 
         this.chartManager.Line(data, {});
 
+    }
+
+    addMaxTempGraph(){
+        
+        this.cleanGraph();
+
+        var dataset = calculateTemperature.getMaxTemps();
+        var labels = calculateTemperature.getLabelsForTemps();
+
+        var data = {
+            labels: labels,
+            datasets: [
+            {
+                label: "Evolución de la temperatura máxima",
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: dataset
+            }]
+        };
+        
+        domSelect('.title',this.view).innerHTML = "Evolución de la temperatura máxima";
+
+        this.chartManager.Line(data, {});
+
+    }
+
+    addPlaneTemp(plane, coordenate, time){
+        
+        this.cleanGraph();
+
+        var object = calculateTemperature.getTempsForPlane(plane, coordenate, time);
+        var dataset = object.temperatures;
+        var labels = object.labels;
+
+        console.log(dataset);
+
+        var data = {
+            labels: labels,
+            datasets: [
+            {
+                label: "Evolución de la temperatura máxima",
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: dataset
+            }]
+        };
+        
+        domSelect('.title',this.view).innerHTML = "Temperatura del plano '" + plane + " " + coordenate + "' en el tiempo " + time;
+
+        this.chartManager.Line(data, {});
+
+    }
+
+    calculateMaxTempGraph(){
+        this.addMaxTempGraph();
+        this.showGraph();
+    }
+    
+    calculatePointGraph(){
+        this.addPointGraph(this.controlPanel.xValue,this.controlPanel.yValue,this.controlPanel.zValue);
+        this.showGraph();
+    }
+
+    calculatePlaneTemp(){
+        this.addPlaneTemp(this.controlPanel.plane, this.controlPanel.coordenate, this.controlPanel.time);
+        this.showGraph();
+    }
+
+    cleanGraph(){
+        
+        if(this.find('.temperatureChart')!= null){
+            this.find('.temperatureChart').remove(); 
+        }
+        
+        this.append('<canvas class="temperatureChart"><canvas>');
+        
+        this.chart = this.find('.temperatureChart');
+        this.chartManager = new Chart(this.chart._view.getContext("2d"));
     }
 
     showGraph(){
