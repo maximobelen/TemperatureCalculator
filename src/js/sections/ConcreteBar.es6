@@ -128,14 +128,7 @@ class ConcreteBar extends SpookyEl {
 
     addPointGraph(x, y, z){
         
-        if(this.find('.temperatureChart')!= null){
-            this.find('.temperatureChart').remove(); 
-        }
-        
-        this.append('<canvas class="temperatureChart"><canvas>');
-        
-        this.chart = this.find('.temperatureChart');
-        this.chartManager = new Chart(this.chart._view.getContext("2d"));
+        this.cleanGraph();
 
         var dataset = calculateTemperature.getTempsForPoint(x, y, z);
         var labels = calculateTemperature.getLabelsForTemps();
@@ -163,14 +156,7 @@ class ConcreteBar extends SpookyEl {
 
     addMaxTempGraph(){
         
-        if(this.find('.temperatureChart')!= null){
-            this.find('.temperatureChart').remove(); 
-        }
-        
-        this.append('<canvas class="temperatureChart"><canvas>');
-        
-        this.chart = this.find('.temperatureChart');
-        this.chartManager = new Chart(this.chart._view.getContext("2d"));
+        this.cleanGraph();
 
         var dataset = calculateTemperature.getMaxTemps();
         var labels = calculateTemperature.getLabelsForTemps();
@@ -196,19 +182,15 @@ class ConcreteBar extends SpookyEl {
 
     }
 
-    addMaxTempGraph(plane){
+    addPlaneTemp(plane, coordenate, time){
         
-        if(this.find('.temperatureChart')!= null){
-            this.find('.temperatureChart').remove(); 
-        }
-        
-        this.append('<canvas class="temperatureChart"><canvas>');
-        
-        this.chart = this.find('.temperatureChart');
-        this.chartManager = new Chart(this.chart._view.getContext("2d"));
+        this.cleanGraph();
 
-        var dataset = calculateTemperature.getMaxTemps();
-        var labels = calculateTemperature.getLabelsForTemps();
+        var object = calculateTemperature.getTempsForPlane(plane, coordenate, time);
+        var dataset = object.temperatures;
+        var labels = object.labels;
+
+        console.log(dataset);
 
         var data = {
             labels: labels,
@@ -225,7 +207,7 @@ class ConcreteBar extends SpookyEl {
             }]
         };
         
-        domSelect('.title',this.view).innerHTML = "Evolución de la temperatura máxima";
+        domSelect('.title',this.view).innerHTML = "Temperatura del plano '" + plane + " " + coordenate + "' en el tiempo " + time;
 
         this.chartManager.Line(data, {});
 
@@ -242,8 +224,20 @@ class ConcreteBar extends SpookyEl {
     }
 
     calculatePlaneTemp(){
-        this.addPlaneTemp(this.controlPanel.planeValue);
+        this.addPlaneTemp(this.controlPanel.plane, this.controlPanel.coordenate, this.controlPanel.time);
         this.showGraph();
+    }
+
+    cleanGraph(){
+        
+        if(this.find('.temperatureChart')!= null){
+            this.find('.temperatureChart').remove(); 
+        }
+        
+        this.append('<canvas class="temperatureChart"><canvas>');
+        
+        this.chart = this.find('.temperatureChart');
+        this.chartManager = new Chart(this.chart._view.getContext("2d"));
     }
 
     showGraph(){

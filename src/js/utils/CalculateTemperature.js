@@ -47,6 +47,53 @@ var CalculateTemperature = {
       return temperatures;
   },
 
+  getTempsForPlane: function (plane, coordenate, time) {
+      
+      var temperatures = [];
+      var labels = [];
+
+      switch(plane){
+        case "x": 
+          if(coordenate <= Nx){
+            for(var y = 0; y < Ny; y++){
+              for(var z = 0; z < Nz; z++){
+                var index = this.returnIndex(coordenate, y , z, time);
+                temperatures.push(temps[index]);
+                labels.push("(" + coordenate + ", "+ y +", "+ z +")");
+              }
+            }
+          }
+          break;
+        case "y":
+          if(coordenate <= Ny){
+            for(var x = 0; x < Nx; x++){
+              for(var z = 0; z < Nz; z++){
+                var index = this.returnIndex(x, coordenate , z, time);
+                temperatures.push(temps[index]);
+                labels.push("(" + x + ", "+ coordenate +", "+ z +")");
+              }
+            }
+          }
+          break;
+        case "z":
+          if(coordenate <= Nz){
+            for(var x = 0; x < Nx; x++){
+              for(var y = 0; y < Ny; y++){
+                var index = this.returnIndex(x, y , coordenate, time);
+                temperatures.push(temps[index]);
+                labels.push("(" + x + ", "+ y +", "+ coordenate +")");
+              }
+            }
+          }
+          break;
+          
+        default:
+          console.log("ERROR");
+      }
+
+      return {temperatures: temperatures, labels:labels};
+  },
+
   getMaxTemps: function () {
       
       var maxTemperatures = [];

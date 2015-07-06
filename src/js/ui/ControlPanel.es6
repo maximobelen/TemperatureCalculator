@@ -40,7 +40,9 @@ class ControlPanel extends SpookyEl {
         this.zValue = 0;
         this.tValue = 0;
         this.planeValue = "";
-
+        this.plane = "";
+        this.coordenate = 0;
+        this.time = 0;
         this.addListeners();
 
     }
@@ -111,17 +113,24 @@ class ControlPanel extends SpookyEl {
         var badRequest = true;
         var planeName = this.planeValue.charAt(0);
         if(planeName == "x" || planeName == "y" || planeName == "z"){
+          this.plane = planeName;
           if(this.planeValue.charAt(1) == " "){
-            var coordenate = parseFloat(this.planeValue.substring(2, this.planeValue.length));
+            var secondSpace = this.planeValue.indexOf(" ", 2);
+            var coordenate = parseFloat(this.planeValue.substring(2, secondSpace));
             if(typeof coordenate == "number" && !isNaN(coordenate)){
-              this.onPlaneButtonClick.dispatch();
-              domSelect('.plane-value', this.view).innerHTML = "";
-              badRequest = false;
+              this.coordenate = coordenate;
+              var time = parseFloat(this.planeValue.substring(secondSpace + 1, this.planeValue.length));
+              if(typeof time == "number" && !isNaN(time)){
+                this.time = time;
+                this.onPlaneButtonClick.dispatch();
+                domSelect('.plane-value', this.view).innerHTML = "";
+                badRequest = false;
+              }
             }
           }
         }
         if(badRequest){
-          alert("El formato ingresado debe de tener el nombre del plano (x, y, z), un espacio y la coordenada. Por ejemplo: 'x 5' ");
+          alert("El formato ingresado debe de tener el nombre del plano (x, y, z), un espacio, la coordenada, un espacio y un valor de tiempo. Por ejemplo: 'x 5 3' ");
         }
 
       });
