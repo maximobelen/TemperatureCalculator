@@ -10,4 +10,10 @@ The json that contains the temperature matix was created with a discretization o
   
 1 - Download the project  
 2 - Run npm install  
-3 - Open a browser in http://localhost:9001 and... Its running! :)  
+3 - Run grunt  
+4 - Open a browser in http://localhost:9001 and... Its running! :)  
+
+## Deploy
+  
+1 - Run grunt build  
+2 - In the dist folder you have the deploy version
