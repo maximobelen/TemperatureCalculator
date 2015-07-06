@@ -36,7 +36,7 @@ var CalculateTemperature = {
       return index;
   },
 
-  getTempsForPoint:function (x, y, z) {
+  getTempsForPoint: function (x, y, z) {
       
       var temperatures = [];
       
@@ -47,7 +47,30 @@ var CalculateTemperature = {
       return temperatures;
   },
 
-  getLabelsForTemps:function () {
+  getMaxTemps: function () {
+      
+      var maxTemperatures = [];
+      var initial = 0;
+      var last = temps.length / (Nt+1);
+
+      for(var i = 1; i <= Nt; i++){
+        var temperatures = temps.slice(initial, last*i);
+        initial = (last*i) + 1;
+
+        var max = 0;
+        for(var j = 0; j < temperatures.length; j++){
+          if(temperatures[j] > max){
+            max = temperatures[j];
+          }
+        }
+        maxTemperatures.push(max);
+      }
+
+      console.log(maxTemperatures);
+      return maxTemperatures;
+  },
+
+  getLabelsForTemps: function () {
       
       var labels = [];
       

@@ -16,18 +16,21 @@ class ControlPanel extends SpookyEl {
 
         this.temperatureCalculate = new SpookyEl('.button-temperature', this);
         this.graph = new SpookyEl('.button-graphic', this);
+        this.graphMaxTemp = new SpookyEl('.button-graphic-max-temp', this);
+
         this.home = new SpookyEl('.home-button', this);
         this.pointForm = new SpookyEl('.point-form', this);
         this.isEmpty = true;
 
         this.onCalculateTemperature = new Signal();
         this.onClickGraph = new Signal();
+        this.onClickMaxTemp = new Signal();
 
         this.xInput =  new SpookyEl('.x-value', this);
         this.yInput =  new SpookyEl('.y-value', this);
         this.zInput =  new SpookyEl('.z-value', this);
         this.tInput =  new SpookyEl('.t-value', this);
-        
+
         this.xValue = 0;
         this.yValue = 0;
         this.zValue = 0;
@@ -50,11 +53,10 @@ class ControlPanel extends SpookyEl {
       TweenMax.fromTo(this.home, 1.5, {
           autoAlpha:0
       }, {
-          autoAlpha:0.8,
+          autoAlpha:1,
           ease: Expo.easeOut
       });
 
-      
     }
 
     addGraphListeners(){
@@ -62,12 +64,10 @@ class ControlPanel extends SpookyEl {
       TweenMax.to(this.graph, 0.2, {
         autoAlpha:1
       });
-  
-      
+
       this.graph.on( 'click', (e) => {
         e.preventDefault();
         this.onClickGraph.dispatch();
-
       });
 
       this.graph.on( 'mouseenter', () => {
@@ -83,19 +83,23 @@ class ControlPanel extends SpookyEl {
       });
 
       this.graph.removeClass('disable');
-      
+
     }
 
     addListeners(){
-      var _this = this;
+
       this.temperatureCalculate.on( 'click', (e) => {
         e.preventDefault();
-        _this.onCalculateTemperature.dispatch();
+        this.onCalculateTemperature.dispatch();
 
-        domSelect('.x-value',_this).innerHTML = 0;
-        domSelect('.y-value',_this).innerHTML = 0;
-        domSelect('.z-value',_this.view).innerHTML = 0;
-        domSelect('.t-value',_this.view).innerHTML = 0;
+        domSelect('.x-value', this).innerHTML = 0;
+        domSelect('.y-value', this).innerHTML = 0;
+        domSelect('.z-value', this.view).innerHTML = 0;
+        domSelect('.t-value', this.view).innerHTML = 0;
+      });
+
+      this.graphMaxTemp.on( 'click', (e) => {
+        this.onClickMaxTemp.dispatch();
       });
 
       this.xInput.on('input', (e) => {
@@ -114,11 +118,17 @@ class ControlPanel extends SpookyEl {
       this.home.on( 'click', () =>{
             router.go('home');
             this.animateOut();
-      } );
+      });
 
       this.temperatureCalculate.on( 'mouseenter', () => {
           TweenMax.to(this.temperatureCalculate, 0.2, {
             autoAlpha:0.6
+          });
+      });
+
+      this.temperatureCalculate.on( 'mouseleave', () => {
+          TweenMax.to(this.temperatureCalculate, 0.2, {
+            autoAlpha:1
           });
       });
 
@@ -134,12 +144,17 @@ class ControlPanel extends SpookyEl {
           });
       });
 
-      this.temperatureCalculate.on( 'mouseleave', () => {
-          TweenMax.to(this.temperatureCalculate, 0.2, {
-            autoAlpha:1
+      this.graphMaxTemp.on( 'mouseenter', () => {
+          TweenMax.to(this.graphMaxTemp, 0.2, {
+            autoAlpha:0.6
           });
       });
 
+      this.graphMaxTemp.on( 'mouseleave', () => {
+          TweenMax.to(this.graphMaxTemp, 0.2, {
+            autoAlpha:1
+          });
+      });
 
     }
 
