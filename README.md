@@ -21,3 +21,7 @@ The json that contains the temperature matix was created with a discretization o
   
 1 - Run grunt build  
 2 - In the dist folder you have the deploy version
+
+## Used Frameworks  
+  
+For canvas use we are using --> http://threejs.org  
